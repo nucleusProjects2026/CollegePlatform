@@ -1,0 +1,67 @@
+name: CI Security & Build Checks
+
+on:
+  pull_request:
+    branches:
+      - develop
+      - main
+
+  push:
+    branches:
+      - develop
+      - main
+
+jobs:
+  security-and-build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: |
+            client/package-lock.json
+            server/package-lock.json
+
+      - name: Block environment files
+        run: |
+          if find . -type f \( -name ".env" -o -name ".env.*" \) | grep -q .; then
+            echo "Error: .env file detected."
+            exit 1
+          fi
+
+      - name: Block committed dependencies
+        run: |
+          if find . -type d -name "node_modules" | grep -q .; then
+            echo "Error: node_modules folder detected."
+            exit 1
+          fi
+
+      - name: Validate .gitignore
+        run: |
+          grep -q "node_modules" .gitignore || (echo "Error: node_modules missing from .gitignore." && exit 1)
+          grep -q ".env" .gitignore || (echo "Error: .env missing from .gitignore." && exit 1)
+
+      - name: Install client dependencies
+        working-directory: client
+        run: npm ci
+
+      - name: Lint client
+        working-directory: client
+        run: npm run lint
+
+      - name: Build client
+        working-directory: client
+        run: npm run build
+
+      - name: Install server dependencies
+        working-directory: server
+        run: npm ci
+
+      - name: Check server syntax
+        run: node --check server/src/app.js
