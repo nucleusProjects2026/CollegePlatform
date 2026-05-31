@@ -1,7 +1,7 @@
+import FacultyLocator from './pages/FacultyLocator.jsx'
+
 const App = () => {
-  return (
-    <div>App</div>
-  )
+  return <FacultyLocator />
 }
 
 export default App
