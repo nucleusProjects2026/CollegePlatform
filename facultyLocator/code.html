@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Faculty Locator | College Mesh</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@700;800&amp;family=Space+Mono:ital,wght@0,400;0,700;1,400&amp;family=Virgil&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "primary-container": "#6965db",
+                    "error-container": "#ffdad6",
+                    "outline-variant": "#c7c4d5",
+                    "outline": "#777585",
+                    "surface-variant": "#e1e3e4",
+                    "error": "#ba1a1a",
+                    "secondary-fixed": "#e4e2e4",
+                    "on-surface": "#191c1d",
+                    "inverse-surface": "#2e3132",
+                    "border-muted": "#CED4DA",
+                    "primary-fixed": "#e2dfff",
+                    "inverse-primary": "#c3c0ff",
+                    "tertiary-container": "#a86400",
+                    "on-secondary": "#ffffff",
+                    "secondary-container": "#e2dfe1",
+                    "canvas-bg": "#FFFFFF",
+                    "on-error": "#ffffff",
+                    "tertiary": "#864e00",
+                    "surface-dim": "#d9dadb",
+                    "on-tertiary": "#ffffff",
+                    "surface-tint": "#534ec3",
+                    "tertiary-fixed": "#ffdcbd",
+                    "surface-container-lowest": "#ffffff",
+                    "on-background": "#191c1d",
+                    "on-primary-container": "#fefaff",
+                    "inverse-on-surface": "#f0f1f2",
+                    "on-error-container": "#93000a",
+                    "surface-container-highest": "#e1e3e4",
+                    "on-tertiary-container": "#fffaff",
+                    "on-surface-variant": "#464553",
+                    "primary-fixed-dim": "#c3c0ff",
+                    "tertiary-fixed-dim": "#ffb86d",
+                    "surface": "#f8f9fa",
+                    "secondary-fixed-dim": "#c8c6c8",
+                    "on-secondary-fixed": "#1b1b1d",
+                    "on-primary-fixed-variant": "#3a33ab",
+                    "secondary": "#5f5e60",
+                    "on-tertiary-fixed": "#2c1600",
+                    "on-primary": "#ffffff",
+                    "on-tertiary-fixed-variant": "#683c00",
+                    "background": "#f8f9fa",
+                    "on-primary-fixed": "#0f0069",
+                    "surface-container-high": "#e7e8e9",
+                    "surface-container": "#edeeef",
+                    "primary": "#504bc0",
+                    "ink-black": "#1E1E20",
+                    "on-secondary-fixed-variant": "#474649",
+                    "surface-container-low": "#f3f4f5",
+                    "on-secondary-container": "#636264",
+                    "surface-bright": "#f8f9fa"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "margin-page": "24px",
+                    "unit": "4px",
+                    "canvas-padding": "40px",
+                    "gutter": "16px"
+            },
+            "fontFamily": {
+                    "label-sm": ["Space Mono"],
+                    "display-lg": ["Bricolage Grotesque"],
+                    "headline-lg-mobile": ["Bricolage Grotesque"],
+                    "headline-lg": ["Bricolage Grotesque"],
+                    "body-lg": ["Virgil", "cursive"],
+                    "label-md": ["Space Mono"],
+                    "body-md": ["Virgil", "cursive"]
+            },
+            "fontSize": {
+                    "label-sm": ["12px", {"lineHeight": "1.1", "fontWeight": "400"}],
+                    "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "headline-lg-mobile": ["24px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                    "headline-lg": ["32px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                    "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "label-md": ["14px", {"lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                    "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .rough-border {
+            border: 1.5px solid #777585;
+            border-radius: 2px;
+            position: relative;
+        }
+        /* Hand-drawn style overrides */
+        .sketch-box {
+            position: relative;
+            background: white;
+            border: 1.5px solid #1E1E20;
+            box-shadow: 2px 2px 0px 0px #1E1E20;
+            transition: all 0.2s ease;
+        }
+        .sketch-box:active {
+            box-shadow: 0px 0px 0px 0px #1E1E20;
+            transform: translate(2px, 2px);
+        }
+        .status-pill {
+            border: 1.5px solid currentColor;
+            padding: 2px 8px;
+            border-radius: 999px;
+            font-family: 'Space Mono', monospace;
+            font-size: 10px;
+            text-transform: uppercase;
+            font-weight: 700;
+        }
+        .canvas-area {
+            background-image: radial-gradient(#CED4DA 0.5px, transparent 0.5px);
+            background-size: 20px 20px;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-canvas-bg text-on-surface font-body-md selection:bg-primary-container selection:text-white">
+<!-- Top Navigation Shell -->
+<header class="fixed top-0 w-full z-50 bg-canvas-bg border-b-[1.5px] border-outline-variant flex justify-between items-center px-margin-page h-16">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary text-2xl transition-all duration-200 active:scale-95 cursor-pointer">grid_view</span>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile font-bold text-primary">College Mesh</h1>
+</div>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-primary text-2xl transition-all duration-200 active:scale-95 cursor-pointer">notifications</span>
+<div class="w-8 h-8 rounded-full bg-primary-container flex items-center justify-center text-white text-[10px] font-bold border-[1.5px] border-ink-black">AK</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="pt-20 pb-32 px-margin-page canvas-area min-h-screen">
+<!-- Page Header & Search -->
+<section class="mb-8">
+<div class="flex justify-between items-center mb-6">
+<div>
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-ink-black">Faculty locator</h2>
+<p class="font-label-sm text-label-sm text-outline">SJEC • 2025–26 Academic Year</p>
+</div>
+</div>
+<!-- Search bar & Filter -->
+<div class="flex flex-col gap-4">
+<div class="relative group">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline">search</span>
+<input class="w-full pl-10 pr-4 py-3 bg-white border-[1.5px] border-ink-black rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 font-body-md text-body-md" placeholder="Search by name or department..." type="text"/>
+</div>
+<button class="w-full flex items-center justify-between px-4 py-3 bg-primary-fixed text-on-primary-fixed border-[1.5px] border-ink-black rounded-lg transition-all active:scale-95">
+<span class="font-label-md text-label-md">Filter by Department</span>
+<span class="material-symbols-outlined">expand_more</span>
+</button>
+</div>
+</section>
+<!-- Faculty List (Kinetic Bento Cards) -->
+<section class="space-y-4 mb-12">
+<!-- Faculty Item 1 -->
+<div class="sketch-box p-4 flex flex-col gap-3 group">
+<div class="flex justify-between items-start">
+<div class="flex items-center gap-3">
+<div class="w-12 h-12 bg-primary-container/10 border-[1.5px] border-ink-black rounded-full flex items-center justify-center font-bold text-primary">RN</div>
+<div>
+<h3 class="font-headline-lg-mobile text-[18px] leading-tight">Ms. Rakshitha Naresh</h3>
+<p class="font-label-sm text-label-sm text-outline">CSE • Asst. Professor</p>
+</div>
+</div>
+<span class="status-pill text-green-600 bg-green-50">Available</span>
+</div>
+<div class="flex items-center gap-2 pt-2 border-t border-dashed border-outline-variant">
+<span class="material-symbols-outlined text-[18px] text-outline">meeting_room</span>
+<span class="font-label-sm text-label-sm">Block 3 • R-302</span>
+<button class="ml-auto text-primary flex items-center gap-1 font-bold active:scale-95">
+<span class="text-xs uppercase font-label-sm">Locate</span>
+<span class="material-symbols-outlined text-[16px]">near_me</span>
+</button>
+</div>
+</div>
+<!-- Faculty Item 2 -->
+<div class="sketch-box p-4 flex flex-col gap-3 group">
+<div class="flex justify-between items-start">
+<div class="flex items-center gap-3">
+<div class="w-12 h-12 bg-tertiary-fixed/30 border-[1.5px] border-ink-black rounded-full flex items-center justify-center font-bold text-tertiary">PM</div>
+<div>
+<h3 class="font-headline-lg-mobile text-[18px] leading-tight">Dr. Priya Mohan</h3>
+<p class="font-label-sm text-label-sm text-outline">CSE • Associate Prof.</p>
+</div>
+</div>
+<span class="status-pill text-error bg-error-container/20">In class</span>
+</div>
+<div class="flex items-center gap-2 pt-2 border-t border-dashed border-outline-variant">
+<span class="material-symbols-outlined text-[18px] text-outline">meeting_room</span>
+<span class="font-label-sm text-label-sm">Block 2 • LH-201</span>
+<button class="ml-auto text-primary flex items-center gap-1 font-bold opacity-50 cursor-not-allowed">
+<span class="text-xs uppercase font-label-sm">Waitlist</span>
+<span class="material-symbols-outlined text-[16px]">schedule</span>
+</button>
+</div>
+</div>
+<!-- Faculty Item 3 -->
+<div class="sketch-box p-4 flex flex-col gap-3 group">
+<div class="flex justify-between items-start">
+<div class="flex items-center gap-3">
+<div class="w-12 h-12 bg-secondary-container border-[1.5px] border-ink-black rounded-full flex items-center justify-center font-bold text-on-surface-variant">SK</div>
+<div>
+<h3 class="font-headline-lg-mobile text-[18px] leading-tight">Mr. Suresh Kumar</h3>
+<p class="font-label-sm text-label-sm text-outline">EC • Asst. Professor</p>
+</div>
+</div>
+<span class="status-pill text-tertiary bg-tertiary-fixed/30">On leave</span>
+</div>
+<div class="flex items-center gap-2 pt-2 border-t border-dashed border-outline-variant">
+<span class="material-symbols-outlined text-[18px] text-outline">meeting_room</span>
+<span class="font-label-sm text-label-sm">Block 4 • R-410</span>
+</div>
+</div>
+<!-- Faculty Item 4 -->
+<div class="sketch-box p-4 flex flex-col gap-3 group">
+<div class="flex justify-between items-start">
+<div class="flex items-center gap-3">
+<div class="w-12 h-12 bg-primary-container/10 border-[1.5px] border-ink-black rounded-full flex items-center justify-center font-bold text-primary">AM</div>
+<div>
+<h3 class="font-headline-lg-mobile text-[18px] leading-tight">Ms. Asha Mallya</h3>
+<p class="font-label-sm text-label-sm text-outline">ME • Professor</p>
+</div>
+</div>
+<span class="status-pill text-green-600 bg-green-50">Available</span>
+</div>
+<div class="flex items-center gap-2 pt-2 border-t border-dashed border-outline-variant">
+<span class="material-symbols-outlined text-[18px] text-outline">meeting_room</span>
+<span class="font-label-sm text-label-sm">Block 1 • R-108</span>
+<button class="ml-auto text-primary flex items-center gap-1 font-bold active:scale-95">
+<span class="text-xs uppercase font-label-sm">Locate</span>
+<span class="material-symbols-outlined text-[16px]">near_me</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Status Legend & Map Selector -->
+<section class="grid grid-cols-1 gap-6 mb-8">
+<div class="sketch-box p-4 bg-surface-container-low/50">
+<h4 class="font-label-md text-label-md mb-4 uppercase tracking-widest text-outline">Status Legend</h4>
+<div class="space-y-3">
+<div class="flex items-center gap-4">
+<span class="status-pill text-green-600 bg-green-50 w-24 text-center">Available</span>
+<span class="text-body-md text-on-surface-variant italic text-sm">In cabin, free to consult</span>
+</div>
+<div class="flex items-center gap-4">
+<span class="status-pill text-error bg-error-container/20 w-24 text-center">In class</span>
+<span class="text-body-md text-on-surface-variant italic text-sm">Conducting lecture</span>
+</div>
+<div class="flex items-center gap-4">
+<span class="status-pill text-tertiary bg-tertiary-fixed/30 w-24 text-center">On leave</span>
+<span class="text-body-md text-on-surface-variant italic text-sm">Not on campus today</span>
+</div>
+</div>
+</div>
+<div class="sketch-box p-4">
+<h4 class="font-label-md text-label-md mb-4 uppercase tracking-widest text-outline">Block Map Selector</h4>
+<div class="grid grid-cols-2 gap-3">
+<button class="py-3 px-2 border-[1.5px] border-ink-black rounded-lg font-label-md text-label-md bg-white hover:bg-primary-fixed transition-colors active:scale-95">Block 1</button>
+<button class="py-3 px-2 border-[1.5px] border-ink-black rounded-lg font-label-md text-label-md bg-green-50 border-green-600 text-green-700 active:scale-95">Block 2</button>
+<button class="py-3 px-2 border-[1.5px] border-ink-black rounded-lg font-label-md text-label-md bg-white hover:bg-primary-fixed transition-colors active:scale-95">Block 3</button>
+<button class="py-3 px-2 border-[1.5px] border-ink-black rounded-lg font-label-md text-label-md bg-white hover:bg-primary-fixed transition-colors active:scale-95">Block 4</button>
+</div>
+<!-- Mini Map Placeholder -->
+<div class="mt-4 h-32 w-full rounded-lg bg-surface-variant relative overflow-hidden border-[1.5px] border-ink-black">
+<div class="absolute inset-0 opacity-20" style="background-image: repeating-linear-gradient(45deg, #777585 0, #777585 1px, transparent 0, transparent 50%); background-size: 10px 10px;"></div>
+<div class="absolute inset-0 flex items-center justify-center">
+<div class="bg-white border-[1.5px] border-ink-black px-3 py-1 rounded shadow-sm rotate-3">
+<span class="font-body-md text-sm">Interactive Map</span>
+</div>
+</div>
+<img class="w-full h-full object-cover mix-blend-multiply opacity-40" data-alt="A stylized hand-drawn architectural floor plan of a university campus block, simplified with geometric shapes, using a technical blueprint aesthetic with indigo and white colors, bright and minimalist lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBVIU155nT_3DadLVtoUrgQmkq2yRDbGu-Qd1Wv-Cq_n6YU1QAiOxi2GuSR6YzYVHfE1HyCOXVfkeDdOb2E6ReBE36BTFVCdBxOu8fMjFH6RAwW57YL5kdHgJqbT6M0ieZsce_0Ck9ifLy8dnV8hH2HkNkrQ9tuYfFF4BWiD5GDhOv5wwhiPrSHG2I_Pcp9Ah4rPeaAR8XnEQhj4oBkujbqjbt2aVv9tO_oZ9ocJvzreVXVhhb0zFI_f2ilPkkDyEZgCUF0BhruRkjt"/>
+</div>
+</div>
+</section>
+</main>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 w-full z-50 border-t-[1.5px] border-outline-variant bg-canvas-bg flex justify-around items-center h-20 pb-safe px-unit">
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 transition-transform duration-150 active:scale-90" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-sm text-label-sm">Dashboard</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 transition-transform duration-150 active:scale-90" href="#">
+<span class="material-symbols-outlined">forum</span>
+<span class="font-label-sm text-label-sm">Chat</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full px-4 py-1 border-[1.5px] border-primary transition-transform duration-150 active:scale-90" href="#">
+<span class="material-symbols-outlined">school</span>
+<span class="font-label-sm text-label-sm">Faculty</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 transition-transform duration-150 active:scale-90" href="#">
+<span class="material-symbols-outlined">meeting_room</span>
+<span class="font-label-sm text-label-sm">Rooms</span>
+</a>
+</nav>
+<!-- Floating Action Button (FAB) - Suppression Logic: Hidden here per instructions for specific screens -->
+<script>
+        // Simple Micro-interaction for Faculty Cards
+        document.querySelectorAll('.sketch-box').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.transform = 'translate(-2px, -2px)';
+                card.style.boxShadow = '4px 4px 0px 0px #1E1E20';
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'translate(0px, 0px)';
+                card.style.boxShadow = '2px 2px 0px 0px #1E1E20';
+            });
+        });
+    </script>
+</body></html>

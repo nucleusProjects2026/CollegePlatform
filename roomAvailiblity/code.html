@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>College Mesh - Room Availability</title>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@700;800&amp;family=Space+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        @font-face {
+            font-family: 'Virgil';
+            src: url('https://cdn.jsdelivr.net/gh/excalidraw/virgil/dist/Virgil.woff2') format('woff2');
+        }
+
+        body {
+            font-family: 'Virgil', cursive;
+            background-color: #f8f9fa;
+        }
+
+        .kinetic-border {
+            border: 1.5px solid #777585;
+            border-radius: 4px;
+            position: relative;
+        }
+
+        .kinetic-border::after {
+            content: '';
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            right: -4px;
+            bottom: -4px;
+            border: 1px solid rgba(119, 117, 133, 0.2);
+            border-radius: 4px;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .hand-drawn-circle {
+            border-radius: 50% 45% 52% 48% / 48% 51% 49% 52%;
+            border: 1.5px solid currentColor;
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        /* Custom scrollbar for sketching aesthetic */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #c7c4d5; border-radius: 10px; }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary-container": "#6965db",
+                        "error-container": "#ffdad6",
+                        "outline-variant": "#c7c4d5",
+                        "outline": "#777585",
+                        "surface-variant": "#e1e3e4",
+                        "error": "#ba1a1a",
+                        "secondary-fixed": "#e4e2e4",
+                        "on-surface": "#191c1d",
+                        "inverse-surface": "#2e3132",
+                        "border-muted": "#CED4DA",
+                        "primary-fixed": "#e2dfff",
+                        "inverse-primary": "#c3c0ff",
+                        "tertiary-container": "#a86400",
+                        "on-secondary": "#ffffff",
+                        "secondary-container": "#e2dfe1",
+                        "canvas-bg": "#FFFFFF",
+                        "on-error": "#ffffff",
+                        "tertiary": "#864e00",
+                        "surface-dim": "#d9dadb",
+                        "on-tertiary": "#ffffff",
+                        "surface-tint": "#534ec3",
+                        "tertiary-fixed": "#ffdcbd",
+                        "surface-container-lowest": "#ffffff",
+                        "on-background": "#191c1d",
+                        "on-primary-container": "#fefaff",
+                        "inverse-on-surface": "#f0f1f2",
+                        "on-error-container": "#93000a",
+                        "surface-container-highest": "#e1e3e4",
+                        "on-tertiary-container": "#fffaff",
+                        "on-surface-variant": "#464553",
+                        "primary-fixed-dim": "#c3c0ff",
+                        "tertiary-fixed-dim": "#ffb86d",
+                        "surface": "#f8f9fa",
+                        "secondary-fixed-dim": "#c8c6c8",
+                        "on-secondary-fixed": "#1b1b1d",
+                        "on-primary-fixed-variant": "#3a33ab",
+                        "secondary": "#5f5e60",
+                        "on-tertiary-fixed": "#2c1600",
+                        "on-primary": "#ffffff",
+                        "on-tertiary-fixed-variant": "#683c00",
+                        "background": "#f8f9fa",
+                        "on-primary-fixed": "#0f0069",
+                        "surface-container-high": "#e7e8e9",
+                        "surface-container": "#edeeef",
+                        "primary": "#504bc0",
+                        "ink-black": "#1E1E20",
+                        "on-secondary-fixed-variant": "#474649",
+                        "surface-container-low": "#f3f4f5",
+                        "on-secondary-container": "#636264",
+                        "surface-bright": "#f8f9fa"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "margin-page": "24px",
+                        "unit": "4px",
+                        "canvas-padding": "40px",
+                        "gutter": "16px"
+                    },
+                    "fontFamily": {
+                        "label-sm": ["Space Mono"],
+                        "display-lg": ["Bricolage Grotesque"],
+                        "headline-lg-mobile": ["Bricolage Grotesque"],
+                        "headline-lg": ["Bricolage Grotesque"],
+                        "body-lg": ["Virgil, cursive"],
+                        "label-md": ["Space Mono"],
+                        "body-md": ["Virgil, cursive"]
+                    },
+                    "fontSize": {
+                        "label-sm": ["12px", {"lineHeight": "1.1", "fontWeight": "400"}],
+                        "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                        "headline-lg-mobile": ["24px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                        "headline-lg": ["32px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                        "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "label-md": ["14px", {"lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                        "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-canvas-bg text-on-background min-h-screen pb-24">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-canvas-bg dark:bg-on-surface border-b-[1.5px] border-outline-variant dark:border-outline flex justify-between items-center px-margin-page h-16">
+<div class="flex items-center gap-4 transition-all duration-200 active:scale-95">
+<span class="material-symbols-outlined text-primary dark:text-primary-fixed-dim" data-icon="grid_view">grid_view</span>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile font-bold text-primary dark:text-primary-fixed-dim">College Mesh</h1>
+</div>
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-primary dark:text-primary-fixed-dim p-2 rounded-full hover:bg-primary-container/10 transition-all active:scale-95" data-icon="notifications">notifications</button>
+<div class="w-8 h-8 rounded-full border-2 border-primary flex items-center justify-center text-primary font-bold text-xs">AK</div>
+</div>
+</header>
+<main class="pt-20 px-margin-page">
+<!-- Dashboard Intro -->
+<section class="mb-gutter">
+<h2 class="font-headline-lg text-headline-lg text-ink-black mb-1">Room availability</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Check real-time status of campus facilities.</p>
+</section>
+<!-- Filters Section -->
+<section class="grid grid-cols-1 gap-gutter mb-margin-page">
+<div class="space-y-4 kinetic-border p-4 bg-surface-container-low">
+<div class="flex flex-col gap-unit">
+<label class="font-label-md text-label-md text-outline">Select building</label>
+<div class="relative">
+<select class="w-full bg-transparent border-b-2 border-outline focus:border-primary appearance-none py-2 px-1 font-body-md outline-none">
+<option>Block 3 — Engineering</option>
+<option>Block 1 — Admin</option>
+<option>Block 5 — Sciences</option>
+</select>
+<span class="material-symbols-outlined absolute right-2 top-2 pointer-events-none" data-icon="expand_more">expand_more</span>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-gutter">
+<div class="flex flex-col gap-unit">
+<label class="font-label-md text-label-md text-outline">Date</label>
+<input class="bg-transparent border-b-2 border-outline focus:border-primary py-2 font-body-md outline-none" type="date" value="2026-06-25"/>
+</div>
+<div class="flex flex-col gap-unit">
+<label class="font-label-md text-label-md text-outline">Time slot</label>
+<input class="bg-transparent border-b-2 border-outline focus:border-primary py-2 font-body-md outline-none" type="time" value="14:00"/>
+</div>
+</div>
+<button class="w-full kinetic-border bg-primary text-on-primary font-headline-lg-mobile py-3 flex justify-center items-center gap-2 hover:bg-primary-container transition-all active:scale-95">
+<span class="material-symbols-outlined" data-icon="search">search</span>
+                    Check
+                </button>
+</div>
+</section>
+<!-- Results Header -->
+<section class="mb-4 flex justify-between items-end border-b-[1.5px] border-outline-variant pb-2">
+<div>
+<span class="font-label-sm text-label-sm text-primary uppercase tracking-widest">Selected Slot</span>
+<p class="font-headline-lg-mobile text-headline-lg-mobile">Block 3 — Jun 25, 2026</p>
+<p class="font-body-md text-body-md text-outline">2:00 – 4:00 PM</p>
+</div>
+<div class="bg-primary-container/10 text-primary px-3 py-1 rounded-full border border-primary/20 font-label-md">
+                8 Results
+            </div>
+</section>
+<!-- Legend -->
+<div class="flex flex-wrap gap-4 mb-gutter">
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 bg-green-200 border border-green-500 rounded-sm"></span>
+<span class="font-label-sm text-label-sm">Available</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 bg-red-100 border border-red-400 rounded-sm"></span>
+<span class="font-label-sm text-label-sm">Occupied</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 bg-amber-100 border border-amber-500 rounded-sm"></span>
+<span class="font-label-sm text-label-sm">Partially free</span>
+</div>
+</div>
+<!-- Room Grid -->
+<section class="grid grid-cols-2 gap-4">
+<!-- Room 301 -->
+<div class="kinetic-border bg-green-50 p-4 transition-transform hover:-rotate-1 cursor-pointer">
+<h3 class="text-3xl font-bold text-green-800">301</h3>
+<p class="font-label-md text-green-700">Lab • 30 seats</p>
+<div class="mt-2 flex justify-end">
+<span class="material-symbols-outlined text-green-600" data-icon="check_circle">check_circle</span>
+</div>
+</div>
+<!-- Room 302 -->
+<div class="kinetic-border bg-red-50 p-4 transition-transform hover:rotate-1 opacity-80">
+<h3 class="text-3xl font-bold text-red-800">302</h3>
+<p class="font-label-md text-red-700">Lecture hall</p>
+<div class="mt-2 flex justify-end">
+<span class="material-symbols-outlined text-red-600" data-icon="cancel">cancel</span>
+</div>
+</div>
+<!-- Room 303 -->
+<div class="kinetic-border bg-green-50 p-4 transition-transform hover:-rotate-1 cursor-pointer">
+<h3 class="text-3xl font-bold text-green-800">303</h3>
+<p class="font-label-md text-green-700">Seminar • 20</p>
+<div class="mt-2 flex justify-end">
+<span class="material-symbols-outlined text-green-600" data-icon="check_circle">check_circle</span>
+</div>
+</div>
+<!-- Room 304 -->
+<div class="kinetic-border bg-amber-50 p-4 transition-transform hover:rotate-1 cursor-pointer">
+<h3 class="text-3xl font-bold text-amber-800">304</h3>
+<p class="font-label-md text-amber-700">Lab • partial</p>
+<div class="mt-2 flex justify-end">
+<span class="material-symbols-outlined text-amber-600" data-icon="info">info</span>
+</div>
+</div>
+<!-- Room 305 -->
+<div class="kinetic-border bg-red-50 p-4 transition-transform hover:-rotate-1 opacity-80">
+<h3 class="text-3xl font-bold text-red-800">305</h3>
+<p class="font-label-md text-red-700">Lecture hall</p>
+<div class="mt-2 flex justify-end">
+<span class="material-symbols-outlined text-red-600" data-icon="cancel">cancel</span>
+</div>
+</div>
+<!-- Room 306 -->
+<div class="kinetic-border bg-green-50 p-4 transition-transform hover:rotate-1 cursor-pointer">
+<h3 class="text-3xl font-bold text-green-800">306</h3>
+<p class="font-label-md text-green-700">Reading room</p>
+<div class="mt-2 flex justify-end">
+<span class="material-symbols-outlined text-green-600" data-icon="check_circle">check_circle</span>
+</div>
+</div>
+<!-- Room 307 -->
+<div class="kinetic-border bg-green-50 p-4 transition-transform hover:-rotate-1 cursor-pointer">
+<h3 class="text-3xl font-bold text-green-800">307</h3>
+<p class="font-label-md text-green-700">Lab • 25 seats</p>
+<div class="mt-2 flex justify-end">
+<span class="material-symbols-outlined text-green-600" data-icon="check_circle">check_circle</span>
+</div>
+</div>
+<!-- Room 308 -->
+<div class="kinetic-border bg-red-50 p-4 transition-transform hover:rotate-1 opacity-80">
+<h3 class="text-3xl font-bold text-red-800">308</h3>
+<p class="font-label-md text-red-700">HOD cabin</p>
+<div class="mt-2 flex justify-end">
+<span class="material-symbols-outlined text-red-600" data-icon="lock">lock</span>
+</div>
+</div>
+</section>
+<!-- Floor Plan Hint -->
+<section class="mt-margin-page bg-secondary-container p-6 kinetic-border flex items-center justify-between">
+<div class="flex-1">
+<h4 class="font-headline-lg-mobile">View Floor Map</h4>
+<p class="font-body-md text-on-surface-variant">Prefer a visual layout? See exactly where these rooms are located.</p>
+<button class="mt-4 px-6 py-2 kinetic-border bg-canvas-bg font-label-md flex items-center gap-2 hover:bg-primary-container/10 transition-all">
+                    Open Map <span class="material-symbols-outlined" data-icon="map">map</span>
+</button>
+</div>
+<div class="hidden sm:block w-32 h-32 opacity-20">
+<span class="material-symbols-outlined text-9xl" data-icon="floor_lamp">floor_lamp</span>
+</div>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 w-full z-50 border-t-[1.5px] border-outline-variant dark:border-outline bg-canvas-bg dark:bg-on-surface flex justify-around items-center h-20 pb-safe px-unit">
+<div class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant px-4 py-1 transition-transform duration-150 active:scale-90 hover:bg-secondary-container">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-label-sm text-label-sm">Dashboard</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant px-4 py-1 transition-transform duration-150 active:scale-90 hover:bg-secondary-container">
+<span class="material-symbols-outlined" data-icon="forum">forum</span>
+<span class="font-label-sm text-label-sm">Chat</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant px-4 py-1 transition-transform duration-150 active:scale-90 hover:bg-secondary-container">
+<span class="material-symbols-outlined" data-icon="school">school</span>
+<span class="font-label-sm text-label-sm">Faculty</span>
+</div>
+<div class="flex flex-col items-center justify-center bg-primary-container dark:bg-primary-container text-on-primary-container rounded-full px-4 py-1 border-[1.5px] border-primary transition-transform duration-150 active:scale-90">
+<span class="material-symbols-outlined" data-icon="meeting_room">meeting_room</span>
+<span class="font-label-sm text-label-sm">Rooms</span>
+</div>
+</nav>
+<script>
+        // Simple micro-interaction for room selection
+        document.querySelectorAll('.kinetic-border.cursor-pointer').forEach(card => {
+            card.addEventListener('click', () => {
+                // Toggle a "hand-drawn highlight" stroke
+                if (card.style.borderWidth === '3px') {
+                    card.style.borderWidth = '1.5px';
+                    card.style.borderColor = '#777585';
+                } else {
+                    card.style.borderWidth = '3px';
+                    card.style.borderColor = '#504bc0';
+                }
+            });
+        });
+    </script>
+</body></html>

@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>College Mesh Dashboard</title>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@700;800&amp;family=Space+Mono:wght@400;500&amp;family=Virgil&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "primary-container": "#6965db",
+                    "error-container": "#ffdad6",
+                    "outline-variant": "#c7c4d5",
+                    "outline": "#777585",
+                    "surface-variant": "#e1e3e4",
+                    "error": "#ba1a1a",
+                    "secondary-fixed": "#e4e2e4",
+                    "on-surface": "#191c1d",
+                    "inverse-surface": "#2e3132",
+                    "border-muted": "#CED4DA",
+                    "primary-fixed": "#e2dfff",
+                    "inverse-primary": "#c3c0ff",
+                    "tertiary-container": "#a86400",
+                    "on-secondary": "#ffffff",
+                    "secondary-container": "#e2dfe1",
+                    "canvas-bg": "#FFFFFF",
+                    "on-error": "#ffffff",
+                    "tertiary": "#864e00",
+                    "surface-dim": "#d9dadb",
+                    "on-tertiary": "#ffffff",
+                    "surface-tint": "#534ec3",
+                    "tertiary-fixed": "#ffdcbd",
+                    "surface-container-lowest": "#ffffff",
+                    "on-background": "#191c1d",
+                    "on-primary-container": "#fefaff",
+                    "inverse-on-surface": "#f0f1f2",
+                    "on-error-container": "#93000a",
+                    "surface-container-highest": "#e1e3e4",
+                    "on-tertiary-container": "#fffaff",
+                    "on-surface-variant": "#464553",
+                    "primary-fixed-dim": "#c3c0ff",
+                    "tertiary-fixed-dim": "#ffb86d",
+                    "surface": "#f8f9fa",
+                    "secondary-fixed-dim": "#c8c6c8",
+                    "on-secondary-fixed": "#1b1b1d",
+                    "on-primary-fixed-variant": "#3a33ab",
+                    "secondary": "#5f5e60",
+                    "on-tertiary-fixed": "#2c1600",
+                    "on-primary": "#ffffff",
+                    "on-tertiary-fixed-variant": "#683c00",
+                    "background": "#f8f9fa",
+                    "on-primary-fixed": "#0f0069",
+                    "surface-container-high": "#e7e8e9",
+                    "surface-container": "#edeeef",
+                    "primary": "#504bc0",
+                    "ink-black": "#1E1E20",
+                    "on-secondary-fixed-variant": "#474649",
+                    "surface-container-low": "#f3f4f5",
+                    "on-secondary-container": "#636264",
+                    "surface-bright": "#f8f9fa"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "margin-page": "24px",
+                    "unit": "4px",
+                    "canvas-padding": "40px",
+                    "gutter": "16px"
+            },
+            "fontFamily": {
+                    "label-sm": ["Space Mono"],
+                    "display-lg": ["Bricolage Grotesque"],
+                    "headline-lg-mobile": ["Bricolage Grotesque"],
+                    "headline-lg": ["Bricolage Grotesque"],
+                    "body-lg": ["Virgil", "cursive"],
+                    "label-md": ["Space Mono"],
+                    "body-md": ["Virgil", "cursive"]
+            },
+            "fontSize": {
+                    "label-sm": ["12px", {"lineHeight": "1.1", "fontWeight": "400"}],
+                    "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "headline-lg-mobile": ["24px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                    "headline-lg": ["32px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                    "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "label-md": ["14px", {"lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                    "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .sketch-border {
+            border: 1.5px solid currentColor;
+            border-radius: 8px;
+            position: relative;
+        }
+        .sketch-border::after {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            border: 1px solid currentColor;
+            opacity: 0.1;
+            border-radius: 10px;
+            pointer-events: none;
+        }
+        .hand-drawn-underline {
+            background-image: linear-gradient(120deg, #6965db 0%, #6965db 100%);
+            background-repeat: no-repeat;
+            background-size: 100% 0.2em;
+            background-position: 0 88%;
+        }
+        .rough-chip {
+            border: 1px solid currentColor;
+            padding: 2px 8px;
+            border-radius: 4px;
+            transform: rotate(-1deg);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #FFFFFF;
+            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19l7-7 3 3-7 7-3-3z"></path><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"></path><path d="M2 2l7.586 7.586"></path><circle cx="11" cy="11" r="2"></circle></svg>'), auto;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-canvas-bg text-on-surface font-body-md text-body-md">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 flex justify-between items-center px-margin-page h-16 bg-canvas-bg border-b-[1.5px] border-outline-variant">
+<div class="flex items-center gap-4">
+<button class="transition-all duration-200 active:scale-95 hover:bg-primary-container/10 p-2 rounded-full">
+<span class="material-symbols-outlined text-primary">grid_view</span>
+</button>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile font-bold text-primary">College Mesh</h1>
+</div>
+<div class="flex items-center gap-4">
+<button class="transition-all duration-200 active:scale-95 hover:bg-primary-container/10 p-2 rounded-full">
+<span class="material-symbols-outlined text-primary">notifications</span>
+</button>
+<div class="w-8 h-8 rounded-full border-[1.5px] border-primary flex items-center justify-center font-label-md bg-primary-fixed">A</div>
+</div>
+</header>
+<main class="pt-20 pb-24 px-margin-page max-w-xl mx-auto space-y-6">
+<!-- Greeting Section -->
+<section class="space-y-1">
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface">Good morning, <span class="text-primary hand-drawn-underline">Akshatha</span></h2>
+<p class="text-secondary font-body-md">Ready to mesh some knowledge today?</p>
+</section>
+<!-- Bento Summary Grid -->
+<div class="grid grid-cols-2 gap-4">
+<div class="sketch-border border-outline p-4 bg-surface flex flex-col gap-1 transition-all duration-200 hover:border-primary">
+<span class="font-label-sm text-secondary">Semester</span>
+<span class="font-display-lg text-[32px] text-primary">4th</span>
+</div>
+<div class="sketch-border border-outline p-4 bg-surface flex flex-col gap-1 transition-all duration-200 hover:border-primary">
+<span class="font-label-sm text-secondary">Programs</span>
+<span class="font-display-lg text-[32px] text-primary">12</span>
+</div>
+<div class="sketch-border border-outline p-4 bg-surface flex flex-col gap-1 transition-all duration-200 hover:border-primary">
+<span class="font-label-sm text-secondary">Events</span>
+<span class="font-display-lg text-[32px] text-primary">3</span>
+</div>
+<div class="sketch-border border-outline p-4 bg-surface flex flex-col gap-1 transition-all duration-200 hover:border-primary">
+<span class="font-label-sm text-secondary">Notices</span>
+<span class="font-display-lg text-[32px] text-primary">2</span>
+</div>
+</div>
+<!-- Recent Chat Section -->
+<section class="sketch-border border-outline p-4 space-y-4 bg-white shadow-[4px_4px_0px_0px_rgba(105,101,219,0.1)]">
+<div class="flex justify-between items-center">
+<h3 class="font-headline-lg-mobile text-lg text-primary flex items-center gap-2">
+<span class="material-symbols-outlined">forum</span> Mesh chat
+                </h3>
+<span class="font-label-sm text-secondary">12 online</span>
+</div>
+<div class="space-y-3">
+<div class="flex flex-col items-start gap-1">
+<span class="font-label-sm text-secondary ml-2">Ananya</span>
+<div class="bg-surface-variant px-3 py-2 rounded-xl rounded-tl-none border-l-2 border-primary max-w-[80%]">
+                        Lab report due tomorrow!
+                    </div>
+</div>
+<div class="flex flex-col items-start gap-1">
+<span class="font-label-sm text-secondary ml-2">Anusha</span>
+<div class="bg-surface-variant px-3 py-2 rounded-xl rounded-tl-none border-l-2 border-primary max-w-[80%]">
+                        Who's free for study session?
+                    </div>
+</div>
+<div class="flex flex-col items-end gap-1">
+<span class="font-label-sm text-primary mr-2">You</span>
+<div class="bg-primary-container text-white px-3 py-2 rounded-xl rounded-tr-none max-w-[80%]">
+                        I'll be there at 4pm
+                    </div>
+</div>
+</div>
+<div class="relative flex items-center gap-2 mt-4">
+<div class="flex-1 sketch-border border-outline-variant px-3 py-2 text-secondary flex justify-between items-center opacity-60">
+<span>Type something...</span>
+</div>
+<button class="bg-primary text-white w-10 h-10 rounded-full flex items-center justify-center transition-transform active:scale-90">
+<span class="material-symbols-outlined">send</span>
+</button>
+</div>
+</section>
+<!-- Upcoming Events & Programs -->
+<div class="grid grid-cols-1 gap-4">
+<section class="sketch-border border-outline-variant p-4 space-y-3">
+<h3 class="font-label-md text-primary tracking-widest uppercase">Upcoming Events</h3>
+<div class="divide-y divide-outline-variant/30">
+<div class="py-3 flex justify-between items-center group cursor-pointer">
+<div>
+<p class="font-body-md text-on-surface group-hover:text-primary transition-colors">Nucleus Workshop — n8n</p>
+<p class="font-label-sm text-secondary">Jun 25 · Block 3 Lab</p>
+</div>
+<span class="material-symbols-outlined text-outline-variant group-hover:text-primary">chevron_right</span>
+</div>
+<div class="py-3 flex justify-between items-center group cursor-pointer">
+<div>
+<p class="font-body-md text-on-surface group-hover:text-primary transition-colors">Tiara Tech Fest</p>
+<p class="font-label-sm text-secondary">Jul 2 · Main Auditorium</p>
+</div>
+<span class="material-symbols-outlined text-outline-variant group-hover:text-primary">chevron_right</span>
+</div>
+</div>
+</section>
+<section class="sketch-border border-outline-variant p-4 space-y-3">
+<h3 class="font-label-md text-primary tracking-widest uppercase">Programs</h3>
+<div class="space-y-3">
+<div class="flex items-center gap-3">
+<span class="rough-chip font-label-sm text-primary bg-primary/5">CSE</span>
+<p class="font-body-md">DBMS Lab programs</p>
+</div>
+<div class="flex items-center gap-3">
+<span class="rough-chip font-label-sm text-primary bg-primary/5">CSE</span>
+<p class="font-body-md">OS Lab programs</p>
+</div>
+</div>
+</section>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 w-full z-50 flex justify-around items-center h-20 pb-safe px-unit bg-canvas-bg border-t-[1.5px] border-outline-variant">
+<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full px-4 py-1 border-[1.5px] border-primary transition-transform duration-150 active:scale-90" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-sm text-label-sm">Dashboard</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:bg-secondary-container/20 transition-transform duration-150 active:scale-90" href="#">
+<span class="material-symbols-outlined">forum</span>
+<span class="font-label-sm text-label-sm">Chat</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:bg-secondary-container/20 transition-transform duration-150 active:scale-90" href="#">
+<span class="material-symbols-outlined">school</span>
+<span class="font-label-sm text-label-sm">Faculty</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:bg-secondary-container/20 transition-transform duration-150 active:scale-90" href="#">
+<span class="material-symbols-outlined">meeting_room</span>
+<span class="font-label-sm text-label-sm">Rooms</span>
+</a>
+</nav>
+<!-- Visual Polish: Floating Particles -->
+<div class="fixed inset-0 pointer-events-none overflow-hidden z-[-1] opacity-20" id="particle-container"></div>
+<script>
+        // Simple micro-interaction for background "ink" spots
+        const container = document.getElementById('particle-container');
+        for (let i = 0; i < 15; i++) {
+            const particle = document.createElement('div');
+            const size = Math.random() * 8 + 4;
+            particle.style.width = `${size}px`;
+            particle.style.height = `${size}px`;
+            particle.style.position = 'absolute';
+            particle.style.backgroundColor = '#6965db';
+            particle.style.borderRadius = '50%';
+            particle.style.left = `${Math.random() * 100}vw`;
+            particle.style.top = `${Math.random() * 100}vh`;
+            particle.style.filter = 'blur(1px)';
+            particle.style.opacity = Math.random() * 0.3;
+            container.appendChild(particle);
+        }
+
+        // Add random rotation to sketch borders for extra "human" feel
+        document.querySelectorAll('.sketch-border').forEach(el => {
+            const rot = (Math.random() - 0.5) * 1.5;
+            el.style.transform = `rotate(${rot}deg)`;
+        });
+    </script>
+</body></html>
