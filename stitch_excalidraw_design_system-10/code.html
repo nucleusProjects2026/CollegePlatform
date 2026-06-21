@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>College Mesh - Chat</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;700;800&amp;family=Space+Mono:wght@400;500&amp;family=Virgil&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary-container": "#6965db",
+                        "error-container": "#ffdad6",
+                        "outline-variant": "#c7c4d5",
+                        "outline": "#777585",
+                        "surface-variant": "#e1e3e4",
+                        "error": "#ba1a1a",
+                        "secondary-fixed": "#e4e2e4",
+                        "on-surface": "#191c1d",
+                        "inverse-surface": "#2e3132",
+                        "border-muted": "#CED4DA",
+                        "primary-fixed": "#e2dfff",
+                        "inverse-primary": "#c3c0ff",
+                        "tertiary-container": "#a86400",
+                        "on-secondary": "#ffffff",
+                        "secondary-container": "#e2dfe1",
+                        "canvas-bg": "#FFFFFF",
+                        "on-error": "#ffffff",
+                        "tertiary": "#864e00",
+                        "surface-dim": "#d9dadb",
+                        "on-tertiary": "#ffffff",
+                        "surface-tint": "#534ec3",
+                        "tertiary-fixed": "#ffdcbd",
+                        "surface-container-lowest": "#ffffff",
+                        "on-background": "#191c1d",
+                        "on-primary-container": "#fefaff",
+                        "inverse-on-surface": "#f0f1f2",
+                        "on-error-container": "#93000a",
+                        "surface-container-highest": "#e1e3e4",
+                        "on-tertiary-container": "#fffaff",
+                        "on-surface-variant": "#464553",
+                        "primary-fixed-dim": "#c3c0ff",
+                        "tertiary-fixed-dim": "#ffb86d",
+                        "surface": "#f8f9fa",
+                        "secondary-fixed-dim": "#c8c6c8",
+                        "on-secondary-fixed": "#1b1b1d",
+                        "on-primary-fixed-variant": "#3a33ab",
+                        "secondary": "#5f5e60",
+                        "on-tertiary-fixed": "#2c1600",
+                        "on-primary": "#ffffff",
+                        "on-tertiary-fixed-variant": "#683c00",
+                        "background": "#f8f9fa",
+                        "on-primary-fixed": "#0f0069",
+                        "surface-container-high": "#e7e8e9",
+                        "surface-container": "#edeeef",
+                        "primary": "#504bc0",
+                        "ink-black": "#1E1E20",
+                        "on-secondary-fixed-variant": "#474649",
+                        "surface-container-low": "#f3f4f5",
+                        "on-secondary-container": "#636264",
+                        "surface-bright": "#f8f9fa"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "margin-page": "24px",
+                        "unit": "4px",
+                        "canvas-padding": "40px",
+                        "gutter": "16px"
+                    },
+                    "fontFamily": {
+                        "label-sm": ["Space Mono"],
+                        "display-lg": ["Bricolage Grotesque"],
+                        "headline-lg-mobile": ["Bricolage Grotesque"],
+                        "headline-lg": ["Bricolage Grotesque"],
+                        "body-lg": ["Virgil", "cursive"],
+                        "label-md": ["Space Mono"],
+                        "body-md": ["Virgil", "cursive"]
+                    },
+                    "fontSize": {
+                        "label-sm": ["12px", {"lineHeight": "1.1", "fontWeight": "400"}],
+                        "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                        "headline-lg-mobile": ["24px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                        "headline-lg": ["32px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                        "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "label-md": ["14px", {"lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                        "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            line-height: 1;
+            text-transform: none;
+            letter-spacing: normal;
+            word-wrap: normal;
+            white-space: nowrap;
+            direction: ltr;
+        }
+
+        /* Kinetic Sketch Custom Styles */
+        .sketch-border {
+            border: 1.5px solid currentColor;
+            position: relative;
+        }
+        
+        .sketch-border::after {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            border: 1px solid currentColor;
+            opacity: 0.2;
+            pointer-events: none;
+            border-radius: inherit;
+            transform: rotate(0.2deg);
+        }
+
+        .hand-drawn-bubble {
+            border-radius: 12px;
+            border: 1.5px solid #777585;
+            position: relative;
+            background: white;
+        }
+
+        .hand-drawn-bubble-active {
+            border: 2px solid #504bc0;
+            background: #e2dfff;
+        }
+
+        .rough-input {
+            border-bottom: 2px solid #777585;
+            background: transparent;
+        }
+
+        .rough-input:focus {
+            outline: none;
+            border-bottom: 3px solid #504bc0;
+        }
+
+        ::-webkit-scrollbar {
+            width: 4px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #c7c4d5;
+            border-radius: 10px;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="bg-canvas-bg text-on-surface font-body-md overflow-hidden">
+<!-- TopAppBar from JSON -->
+<header class="fixed top-0 w-full z-50 border-b-[1.5px] border-outline-variant dark:border-outline bg-canvas-bg dark:bg-on-surface flex justify-between items-center px-margin-page h-16">
+<div class="flex items-center gap-gutter">
+<button class="transition-all duration-200 active:scale-95 hover:bg-primary-container/10">
+<span class="material-symbols-outlined text-primary dark:text-primary-fixed-dim">grid_view</span>
+</button>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile font-bold text-primary dark:text-primary-fixed-dim">College Mesh</h1>
+</div>
+<div class="flex items-center gap-gutter">
+<button class="transition-all duration-200 active:scale-95 hover:bg-primary-container/10">
+<span class="material-symbols-outlined text-primary dark:text-primary-fixed-dim">notifications</span>
+</button>
+</div>
+</header>
+<!-- Main Container -->
+<main class="flex h-screen pt-16 pb-20">
+<!-- Sidebar Navigation (Desktop/Large Mobile) - Visible on md:flex but here we simulate a mobile view mainly -->
+<aside class="hidden md:flex flex-col w-64 border-r-[1.5px] border-outline-variant bg-surface p-gutter gap-gutter">
+<div class="flex flex-col gap-unit">
+<p class="font-label-sm text-label-sm uppercase opacity-50 px-2">Navigate</p>
+<nav class="flex flex-col gap-1">
+<a class="flex items-center gap-3 p-2 text-secondary hover:bg-primary-container/10 transition-colors" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-md">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 p-2 text-primary bg-primary-container/10 border-l-4 border-primary transition-colors" href="#">
+<span class="material-symbols-outlined">forum</span>
+<span class="font-label-md">Mesh Chat</span>
+</a>
+<a class="flex items-center gap-3 p-2 text-secondary hover:bg-primary-container/10 transition-colors" href="#">
+<span class="material-symbols-outlined">school</span>
+<span class="font-label-md">Faculty</span>
+</a>
+<a class="flex items-center gap-3 p-2 text-secondary hover:bg-primary-container/10 transition-colors" href="#">
+<span class="material-symbols-outlined">meeting_room</span>
+<span class="font-label-md">Rooms</span>
+</a>
+</nav>
+</div>
+</aside>
+<!-- Channel/DM List Sidebar (Always visible on layout) -->
+<nav class="w-20 md:w-72 flex flex-col border-r-[1.5px] border-outline-variant bg-canvas-bg overflow-y-auto overflow-x-hidden">
+<div class="p-gutter space-y-8">
+<!-- Channels -->
+<div>
+<h3 class="hidden md:block font-headline-lg-mobile text-[18px] mb-4 text-ink-black">Channels</h3>
+<div class="space-y-2">
+<!-- #general -->
+<div class="flex items-center justify-between group cursor-pointer p-2 rounded bg-primary-container/10 text-primary border-[1.5px] border-primary/20">
+<div class="flex items-center gap-3">
+<span class="text-primary font-bold">#</span>
+<span class="hidden md:block font-label-md font-bold">general</span>
+</div>
+<span class="hidden md:flex bg-primary text-white text-[10px] h-4 w-4 items-center justify-center rounded-full font-bold">4</span>
+</div>
+<!-- #cse-sem4 -->
+<div class="flex items-center group cursor-pointer p-2 rounded hover:bg-surface-variant transition-colors">
+<div class="flex items-center gap-3">
+<span class="text-outline">#</span>
+<span class="hidden md:block font-label-md text-on-surface-variant font-bold">cse-sem4</span>
+</div>
+</div>
+<!-- #nucleus-club -->
+<div class="flex items-center group cursor-pointer p-2 rounded hover:bg-surface-variant transition-colors">
+<div class="flex items-center gap-3">
+<span class="text-outline">#</span>
+<span class="hidden md:block font-label-md text-on-surface-variant font-bold">nucleus-club</span>
+</div>
+</div>
+<!-- #events -->
+<div class="flex items-center group cursor-pointer p-2 rounded hover:bg-surface-variant transition-colors">
+<div class="flex items-center gap-3">
+<span class="text-outline">#</span>
+<span class="hidden md:block font-label-md text-on-surface-variant font-bold">events</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Direct Messages -->
+<div>
+<h3 class="hidden md:block font-headline-lg-mobile text-[18px] mb-4 text-ink-black">Direct msgs</h3>
+<div class="space-y-4">
+<div class="flex items-center gap-3 p-2 group cursor-pointer hover:bg-surface-variant rounded">
+<div class="w-8 h-8 rounded-full bg-primary-fixed flex items-center justify-center text-primary font-bold text-xs sketch-border">AN</div>
+<span class="hidden md:block font-label-md font-bold">Ananya</span>
+</div>
+<div class="flex items-center gap-3 p-2 group cursor-pointer hover:bg-surface-variant rounded">
+<div class="w-8 h-8 rounded-full bg-tertiary-fixed flex items-center justify-center text-tertiary font-bold text-xs sketch-border">AS</div>
+<span class="hidden md:block font-label-md font-bold">Anusha</span>
+</div>
+<div class="flex items-center gap-3 p-2 group cursor-pointer hover:bg-surface-variant rounded">
+<div class="w-8 h-8 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container font-bold text-xs sketch-border">DP</div>
+<span class="hidden md:block font-label-md font-bold">Deekshith</span>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-auto border-t-[1.5px] border-outline-variant p-4">
+<button class="flex items-center gap-3 text-secondary hover:text-primary transition-colors">
+<span class="material-symbols-outlined">settings</span>
+<span class="hidden md:block font-label-md">Settings</span>
+</button>
+</div>
+</nav>
+<!-- Chat Viewport -->
+<section class="flex-1 flex flex-col bg-surface-container-lowest relative">
+<!-- Chat Header -->
+<div class="h-14 border-b-[1.5px] border-outline-variant flex items-center justify-between px-6 bg-canvas-bg/80 backdrop-blur-sm sticky top-0 z-10">
+<div class="flex items-center gap-3">
+<h2 class="font-headline-lg-mobile text-[20px] text-on-surface"># general</h2>
+<span class="text-label-sm text-secondary">• 14 online</span>
+</div>
+<div class="flex items-center gap-4 text-outline">
+<span class="material-symbols-outlined cursor-pointer hover:text-primary transition-colors">search</span>
+<span class="material-symbols-outlined cursor-pointer hover:text-primary transition-colors">group</span>
+<div class="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center font-bold text-xs">AK</div>
+</div>
+</div>
+<!-- Messages Area -->
+<div class="flex-1 overflow-y-auto p-gutter flex flex-col space-y-8">
+<!-- Incoming Message 1 -->
+<div class="flex items-start gap-3 group">
+<div class="w-10 h-10 rounded-full bg-primary-fixed flex items-center justify-center text-primary font-bold sketch-border shrink-0">AN</div>
+<div class="max-w-[80%]">
+<div class="flex items-baseline gap-2 mb-1">
+<span class="font-bold text-sm">Ananya</span>
+<span class="text-[10px] text-outline">9:12 am</span>
+</div>
+<div class="hand-drawn-bubble p-3 text-body-md text-on-surface-variant">
+                            Hey everyone, DBMS lab report is due today!
+                        </div>
+</div>
+</div>
+<!-- Incoming Message 2 -->
+<div class="flex items-start gap-3 group">
+<div class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container font-bold sketch-border shrink-0">DP</div>
+<div class="max-w-[80%]">
+<div class="flex items-baseline gap-2 mb-1">
+<span class="font-bold text-sm">Deekshith</span>
+<span class="text-[10px] text-outline">9:14 am</span>
+</div>
+<div class="hand-drawn-bubble p-3 text-body-md text-on-surface-variant">
+                            Already submitted mine 😄 who needs help?
+                        </div>
+</div>
+</div>
+<!-- Incoming Message 3 -->
+<div class="flex items-start gap-3 group">
+<div class="w-10 h-10 rounded-full bg-tertiary-fixed flex items-center justify-center text-tertiary font-bold sketch-border shrink-0">AS</div>
+<div class="max-w-[80%]">
+<div class="flex items-baseline gap-2 mb-1">
+<span class="font-bold text-sm">Anusha</span>
+<span class="text-[10px] text-outline">9:15 am</span>
+</div>
+<div class="hand-drawn-bubble p-3 text-body-md text-on-surface-variant">
+                            Can someone share the ER diagram template?
+                        </div>
+</div>
+</div>
+<!-- Sent Message -->
+<div class="flex items-start gap-3 justify-end group">
+<div class="max-w-[80%] text-right">
+<div class="flex items-baseline gap-2 mb-1 justify-end">
+<span class="text-[10px] text-outline">9:16 am</span>
+<span class="font-bold text-sm">You</span>
+</div>
+<div class="hand-drawn-bubble hand-drawn-bubble-active p-3 text-body-md inline-block text-left text-ink-black">I'll upload it to Programs section now</div>
+</div>
+<div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-white font-bold shrink-0">AK</div>
+</div>
+<!-- Incoming Message 4 -->
+<div class="flex items-start gap-3 group">
+<div class="w-10 h-10 rounded-full bg-primary-fixed flex items-center justify-center text-primary font-bold sketch-border shrink-0">AN</div>
+<div class="max-w-[80%]">
+<div class="flex items-baseline gap-2 mb-1">
+<span class="font-bold text-sm">Ananya</span>
+<span class="text-[10px] text-outline">9:17 am</span>
+</div>
+<div class="hand-drawn-bubble p-3 text-body-md text-on-surface-variant">
+                            Study session at 4pm? Block 3 reading room
+                        </div>
+</div>
+</div>
+</div>
+<!-- Message Input Sticky Bar -->
+<div class="p-4 bg-canvas-bg border-t-[1.5px] border-outline-variant">
+<div class="flex items-center gap-3">
+<button class="text-outline hover:text-primary transition-colors">
+<span class="material-symbols-outlined">attachment</span>
+</button>
+<div class="flex-1 relative">
+<input class="w-full rough-input py-2 px-4 font-body-md placeholder:opacity-50" placeholder="Type a message..." type="text"/>
+<div class="absolute right-2 top-1/2 -translate-y-1/2 text-outline hover:text-primary cursor-pointer">
+<span class="material-symbols-outlined text-[20px]">sentiment_satisfied</span>
+</div>
+</div>
+<button class="bg-primary-container text-white w-10 h-10 flex items-center justify-center rounded-full shadow-md active:scale-90 transition-transform">
+<span class="material-symbols-outlined">send</span>
+</button>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar from JSON -->
+<nav class="md:hidden fixed bottom-0 w-full z-50 border-t-[1.5px] border-outline-variant dark:border-outline bg-canvas-bg dark:bg-on-surface flex justify-around items-center h-20 pb-safe px-unit">
+<!-- Dashboard -->
+<div class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant px-4 py-1 transition-transform duration-150 active:scale-90 hover:bg-secondary-container dark:hover:bg-secondary-container/20">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-sm text-label-sm">Dashboard</span>
+</div>
+<!-- Chat (Active) -->
+<div class="flex flex-col items-center justify-center bg-primary-container dark:bg-primary-container text-on-primary-container rounded-full px-4 py-1 border-[1.5px] border-primary transition-transform duration-150 active:scale-90">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">forum</span>
+<span class="font-label-sm text-label-sm">Chat</span>
+</div>
+<!-- Faculty -->
+<div class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant px-4 py-1 transition-transform duration-150 active:scale-90 hover:bg-secondary-container dark:hover:bg-secondary-container/20">
+<span class="material-symbols-outlined">school</span>
+<span class="font-label-sm text-label-sm">Faculty</span>
+</div>
+<!-- Rooms -->
+<div class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant px-4 py-1 transition-transform duration-150 active:scale-90 hover:bg-secondary-container dark:hover:bg-secondary-container/20">
+<span class="material-symbols-outlined">meeting_room</span>
+<span class="font-label-sm text-label-sm">Rooms</span>
+</div>
+</nav>
+<script>
+        // Micro-interactions for message bubbles
+        document.querySelectorAll('.hand-drawn-bubble').forEach(bubble => {
+            bubble.addEventListener('click', () => {
+                bubble.classList.add('scale-105');
+                setTimeout(() => bubble.classList.remove('scale-105'), 200);
+            });
+        });
+
+        // Input focus animation
+        const inputField = document.querySelector('.rough-input');
+        inputField.addEventListener('focus', () => {
+            inputField.parentElement.style.transform = 'translateY(-2px)';
+            inputField.parentElement.style.transition = 'transform 0.2s ease-out';
+        });
+        inputField.addEventListener('blur', () => {
+            inputField.parentElement.style.transform = 'translateY(0)';
+        });
+    </script>
+</body></html>
