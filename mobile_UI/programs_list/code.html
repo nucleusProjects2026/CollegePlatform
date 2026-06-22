@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Programs - College Mesh</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@500;600&amp;family=Hanken+Grotesk:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        
+        /* Hide scrollbar for horizontal scroll areas but keep functionality */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-container": "#ffdcc2",
+                        "inverse-surface": "#313030",
+                        "on-surface": "#1c1b1b",
+                        "secondary-fixed-dim": "#adc6ff",
+                        "surface-variant": "#e1e2e3",
+                        "background": "#f8f9fa",
+                        "surface-container-high": "#e7e8e9",
+                        "secondary-fixed": "#d8e2ff",
+                        "on-primary": "#ffffff",
+                        "tertiary-fixed": "#ffdcbb",
+                        "surface-dim": "#d9dadb",
+                        "primary-fixed": "#e9ddff",
+                        "on-secondary-fixed-variant": "#004395",
+                        "primary-container": "#e9ddff",
+                        "surface-container": "#edeeef",
+                        "outline-variant": "#c4c7c8",
+                        "inverse-on-surface": "#f3f4f5",
+                        "on-tertiary-fixed-variant": "#673d00",
+                        "on-surface-variant": "#444748",
+                        "surface-tint": "#6b37c2",
+                        "inverse-primary": "#d0bcff",
+                        "on-primary-fixed": "#23005c",
+                        "secondary-container": "#d8e2ff",
+                        "error-container": "#ffdad6",
+                        "tertiary-fixed-dim": "#ffb869",
+                        "surface-bright": "#f8f9fa",
+                        "on-primary-container": "#23005c",
+                        "on-secondary-container": "#001a42",
+                        "surface-container-low": "#f3f4f5",
+                        "surface-container-highest": "#e2e2e3",
+                        "on-tertiary-container": "#2c1700",
+                        "surface": "#f8f9fa",
+                        "on-secondary-fixed": "#001a42",
+                        "tertiary": "#8a5100",
+                        "on-secondary": "#ffffff",
+                        "surface-container-lowest": "#ffffff",
+                        "outline": "#747778",
+                        "on-tertiary-fixed": "#2c1700",
+                        "on-primary-fixed-variant": "#5516be",
+                        "on-error": "#ffffff",
+                        "primary": "#6b37c2",
+                        "secondary": "#415f91",
+                        "on-tertiary": "#ffffff",
+                        "on-error-container": "#410002",
+                        "on-background": "#1c1b1b",
+                        "primary-fixed-dim": "#d0bcff",
+                        "error": "#ba1a1a",
+                        
+                        // Custom specific colors for chips based on image
+                        "chip-cse": "#6b37c2",
+                        "chip-ec": "#006a60",
+                        "chip-mech": "#8c1d00",
+                        "chip-civil": "#795900"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem",
+                        "2xl": "1rem",
+                        "3xl": "1.5rem"
+                    },
+                    "spacing": {
+                        "sm": "8px",
+                        "lg": "24px",
+                        "margin-desktop": "32px",
+                        "xs": "4px",
+                        "md": "16px",
+                        "gutter": "12px",
+                        "margin-mobile": "16px",
+                        "xl": "32px",
+                        "base": "4px"
+                    },
+                    "fontFamily": {
+                        "label-sm": ["Geist"],
+                        "label-md": ["Geist"],
+                        "body-lg": ["Hanken Grotesk"],
+                        "headline-sm": ["Hanken Grotesk"],
+                        "body-md": ["Hanken Grotesk"],
+                        "headline-md": ["Hanken Grotesk"],
+                        "display-lg": ["Hanken Grotesk"]
+                    },
+                    "fontSize": {
+                        "label-sm": ["10px", {"lineHeight": "12px", "fontWeight": "600"}],
+                        "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                        "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "display-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-surface font-body-md min-h-screen flex flex-col antialiased selection:bg-primary selection:text-on-primary">
+<!-- Top App Bar -->
+<header class="bg-surface-container-low border-b border-outline-variant flat no shadows docked full-width top-0 z-50 flex flex-col px-margin-mobile pt-4 pb-3 sticky">
+<div class="flex justify-between items-center w-full mb-4">
+<h1 class="text-headline-sm font-headline-sm font-bold text-primary">All programs</h1>
+<div class="flex items-center gap-4">
+<button class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center text-on-surface-variant hover:bg-surface-variant transition-colors">
+<span class="material-symbols-outlined" style="font-size: 20px;">search</span>
+</button>
+<div class="w-8 h-8 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center font-label-md font-bold">
+                    AK
+                </div>
+</div>
+</div>
+<!-- Search Bar -->
+<div class="flex items-center gap-3 w-full">
+<div class="relative flex-1">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant" style="font-size: 18px;">search</span>
+<input class="w-full bg-surface-container-high border-none rounded-full py-2.5 pl-10 pr-4 text-body-md text-on-surface placeholder:text-on-surface-variant focus:ring-1 focus:ring-primary focus:outline-none" placeholder="Search programs..." type="text"/>
+</div>
+<button class="bg-primary-container/20 text-primary font-label-md px-4 py-2.5 rounded-full border border-primary/30 flex-shrink-0 whitespace-nowrap hover:bg-primary-container/30 transition-colors">
+                Filter by branch
+            </button>
+</div>
+</header>
+<!-- Main Content -->
+<main class="flex-1 overflow-y-auto pb-24 px-margin-mobile pt-4">
+<!-- Chips Scroll Area -->
+<div class="flex overflow-x-auto no-scrollbar gap-2 mb-6 pb-1">
+<button class="bg-primary text-on-primary font-label-md px-4 py-1.5 rounded-full flex-shrink-0 whitespace-nowrap">
+                All branches
+            </button>
+<button class="bg-chip-cse/10 text-chip-cse border border-chip-cse/30 font-label-md px-4 py-1.5 rounded-full flex-shrink-0 whitespace-nowrap hover:bg-chip-cse/20 transition-colors">
+                CSE
+            </button>
+<button class="bg-chip-ec/10 text-chip-ec border border-chip-ec/30 font-label-md px-4 py-1.5 rounded-full flex-shrink-0 whitespace-nowrap hover:bg-chip-ec/20 transition-colors">
+                EC
+            </button>
+<button class="bg-chip-mech/10 text-chip-mech border border-chip-mech/30 font-label-md px-4 py-1.5 rounded-full flex-shrink-0 whitespace-nowrap hover:bg-chip-mech/20 transition-colors">
+                Mechanical
+            </button>
+<button class="bg-chip-civil/10 text-chip-civil border border-chip-civil/30 font-label-md px-4 py-1.5 rounded-full flex-shrink-0 whitespace-nowrap hover:bg-chip-civil/20 transition-colors">
+                Civil
+            </button>
+</div>
+<!-- Programs List Section -->
+<section>
+<div class="flex justify-between items-center mb-4">
+<h2 class="font-headline-sm text-headline-sm text-on-surface">CSE programs</h2>
+<span class="bg-chip-cse/10 text-chip-cse border border-chip-cse/30 font-label-sm px-2 py-1 rounded-full">18 programs</span>
+</div>
+<div class="flex flex-col gap-1">
+<!-- Card 1 -->
+<div class="flex items-center justify-between py-3 border-b border-surface-container-high hover:bg-surface-container/50 transition-colors cursor-pointer group">
+<div class="flex items-center gap-3">
+<span class="bg-chip-cse/20 text-chip-cse font-label-sm px-2 py-0.5 rounded uppercase font-bold text-[9px]">CSE</span>
+<span class="font-body-md text-on-surface group-hover:text-primary transition-colors">DBMS lab — SQL queries &amp; ER design</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="font-label-sm text-on-surface-variant">12 exps</span>
+<span class="material-symbols-outlined text-on-surface-variant" style="font-size: 16px;">chevron_right</span>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="flex items-center justify-between py-3 border-b border-surface-container-high hover:bg-surface-container/50 transition-colors cursor-pointer group">
+<div class="flex items-center gap-3">
+<span class="bg-chip-cse/20 text-chip-cse font-label-sm px-2 py-0.5 rounded uppercase font-bold text-[9px]">CSE</span>
+<span class="font-body-md text-on-surface group-hover:text-primary transition-colors">OS lab — process scheduling &amp; IPC</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="font-label-sm text-on-surface-variant">10 exps</span>
+<span class="material-symbols-outlined text-on-surface-variant" style="font-size: 16px;">chevron_right</span>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="flex items-center justify-between py-3 border-b border-surface-container-high hover:bg-surface-container/50 transition-colors cursor-pointer group">
+<div class="flex items-center gap-3">
+<span class="bg-chip-cse/20 text-chip-cse font-label-sm px-2 py-0.5 rounded uppercase font-bold text-[9px]">CSE</span>
+<span class="font-body-md text-on-surface group-hover:text-primary transition-colors">DAA lab — sorting &amp; graph algorithms</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="font-label-sm text-on-surface-variant">8 exps</span>
+<span class="material-symbols-outlined text-on-surface-variant" style="font-size: 16px;">chevron_right</span>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="flex items-center justify-between py-3 border-b border-surface-container-high hover:bg-surface-container/50 transition-colors cursor-pointer group">
+<div class="flex items-center gap-3">
+<span class="bg-chip-ec/20 text-chip-ec font-label-sm px-2 py-0.5 rounded uppercase font-bold text-[9px]">EC</span>
+<span class="font-body-md text-on-surface group-hover:text-primary transition-colors">Digital circuits lab</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="font-label-sm text-on-surface-variant">9 exps</span>
+<span class="material-symbols-outlined text-on-surface-variant" style="font-size: 16px;">chevron_right</span>
+</div>
+</div>
+<!-- Card 5 -->
+<div class="flex items-center justify-between py-3 border-b border-surface-container-high hover:bg-surface-container/50 transition-colors cursor-pointer group">
+<div class="flex items-center gap-3">
+<span class="bg-chip-mech/20 text-chip-mech font-label-sm px-2 py-0.5 rounded uppercase font-bold text-[9px]">ME</span>
+<span class="font-body-md text-on-surface group-hover:text-primary transition-colors">Fluid mechanics lab</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="font-label-sm text-on-surface-variant">7 exps</span>
+<span class="material-symbols-outlined text-on-surface-variant" style="font-size: 16px;">chevron_right</span>
+</div>
+</div>
+<!-- Card 6 -->
+<div class="flex items-center justify-between py-3 border-b border-surface-container-high hover:bg-surface-container/50 transition-colors cursor-pointer group">
+<div class="flex items-center gap-3">
+<span class="bg-chip-civil/20 text-chip-civil font-label-sm px-2 py-0.5 rounded uppercase font-bold text-[9px]">CV</span>
+<span class="font-body-md text-on-surface group-hover:text-primary transition-colors">Surveying lab</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="font-label-sm text-on-surface-variant">6 exps</span>
+<span class="material-symbols-outlined text-on-surface-variant" style="font-size: 16px;">chevron_right</span>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Bottom Navigation Bar -->
+<nav class="bg-surface-container border-t border-outline-variant fixed bottom-0 left-0 w-full z-50 flex items-center overflow-x-auto no-scrollbar px-4 pb-2 pt-1 md:hidden"><div class="flex items-center min-w-max w-full"><a class="flex flex-col items-center justify-center text-on-surface-variant px-3 py-1 hover:text-primary group w-[20vw] flex-shrink-0 px-0" href="#"><span class="material-symbols-outlined group-hover:scale-110 transition-transform mb-1" style="font-size: 24px;">dashboard</span><span class="text-label-sm font-label-sm">Dashboard</span></a><a class="flex flex-col items-center justify-center text-on-surface-variant px-3 py-1 hover:text-primary group w-[20vw] flex-shrink-0 px-0" href="#"><span class="material-symbols-outlined group-hover:scale-110 transition-transform mb-1" style="font-size: 24px;">forum</span><span class="text-label-sm font-label-sm">Chat</span></a><a class="flex flex-col items-center justify-center text-primary bg-primary-container/30 rounded-xl py-1 transition-transform w-[20vw] flex-shrink-0 px-0" href="#"><span class="material-symbols-outlined mb-1" style="font-size: 24px; font-variation-settings: 'FILL' 1;">school</span><span class="text-label-sm font-label-sm">Programs</span></a><a class="flex flex-col items-center justify-center text-on-surface-variant px-3 py-1 hover:text-primary group w-[20vw] flex-shrink-0 px-0" href="#"><span class="material-symbols-outlined group-hover:scale-110 transition-transform mb-1" style="font-size: 24px;">supervisor_account</span><span class="text-label-sm font-label-sm">Faculty</span></a><a class="flex flex-col items-center justify-center text-on-surface-variant px-3 py-1 hover:text-primary group w-[20vw] flex-shrink-0 px-0" href="#"><span class="material-symbols-outlined group-hover:scale-110 transition-transform mb-1" style="font-size: 24px;">meeting_room</span><span class="text-label-sm font-label-sm">Rooms</span></a><a class="flex flex-col items-center justify-center text-on-surface-variant px-3 py-1 hover:text-primary group w-[20vw] flex-shrink-0 px-0" href="#"><span class="material-symbols-outlined group-hover:scale-110 transition-transform mb-1" style="font-size: 24px;">calendar_today</span><span class="text-label-sm font-label-sm">Events</span></a><a class="flex flex-col items-center justify-center text-on-surface-variant px-3 py-1 hover:text-primary group w-[20vw] flex-shrink-0 px-0" href="#"><span class="material-symbols-outlined group-hover:scale-110 transition-transform mb-1" style="font-size: 24px;">admin_panel_settings</span><span class="text-label-sm font-label-sm">Admin</span></a></div></nav>
+</body></html>
