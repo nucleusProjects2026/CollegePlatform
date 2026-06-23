@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Faculty Locator - College Mesh</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700&amp;family=Geist:wght@500;600&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary": "#7c3aed",
+                        "on-primary": "#ffffff",
+                        "primary-container": "#ede9fe",
+                        "on-primary-container": "#4c1d95",
+                        "primary-fixed": "#ede9fe",
+                        "on-primary-fixed": "#4c1d95",
+                        "primary-fixed-dim": "#c4b5fd",
+                        "on-primary-fixed-variant": "#6d28d9",
+                        "secondary": "#4f46e5",
+                        "on-secondary": "#ffffff",
+                        "secondary-container": "#e0e7ff",
+                        "on-secondary-container": "#312e81",
+                        "secondary-fixed": "#e0e7ff",
+                        "on-secondary-fixed": "#312e81",
+                        "secondary-fixed-dim": "#a5b4fc",
+                        "on-secondary-fixed-variant": "#4338ca",
+                        "tertiary": "#db2777",
+                        "on-tertiary": "#ffffff",
+                        "tertiary-container": "#fce7f3",
+                        "on-tertiary-container": "#831843",
+                        "tertiary-fixed": "#fce7f3",
+                        "on-tertiary-fixed": "#831843",
+                        "tertiary-fixed-dim": "#f9a8d4",
+                        "on-tertiary-fixed-variant": "#be185d",
+                        "error": "#dc2626",
+                        "on-error": "#ffffff",
+                        "error-container": "#fee2e2",
+                        "on-error-container": "#7f1d1d",
+                        "background": "#f8f9fa",
+                        "on-background": "#111111",
+                        "surface": "#f8f9fa",
+                        "on-surface": "#111111",
+                        "surface-variant": "#e2e3e5",
+                        "on-surface-variant": "#444444",
+                        "outline": "#777777",
+                        "outline-variant": "#cccccc",
+                        "inverse-surface": "#111111",
+                        "inverse-on-surface": "#f8f9fa",
+                        "inverse-primary": "#c4b5fd",
+                        "surface-dim": "#d9dadb",
+                        "surface-bright": "#f8f9fa",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container-low": "#f3f4f5",
+                        "surface-container": "#edeef0",
+                        "surface-container-high": "#e8e9eb",
+                        "surface-container-highest": "#e2e3e5",
+                        "surface-tint": "#7c3aed"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "xs": "4px",
+                        "gutter": "12px",
+                        "base": "4px",
+                        "margin-mobile": "16px",
+                        "sm": "8px",
+                        "lg": "24px",
+                        "margin-desktop": "32px",
+                        "md": "16px",
+                        "xl": "32px"
+                    },
+                    "fontFamily": {
+                        "headline-sm": ["Hanken Grotesk"],
+                        "display-lg": ["Hanken Grotesk"],
+                        "label-sm": ["Geist"],
+                        "body-md": ["Hanken Grotesk"],
+                        "body-lg": ["Hanken Grotesk"],
+                        "headline-md": ["Hanken Grotesk"],
+                        "label-md": ["Geist"]
+                    },
+                    "fontSize": {
+                        "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "display-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "label-sm": ["10px", { "lineHeight": "12px", "fontWeight": "600" }],
+                        "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            background-color: #f8f9fa;
+            color: #111111;
+            font-family: 'Hanken Grotesk', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+        
+        /* Hide scrollbar for horizontal scrolling containers */
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background pb-20 md:pb-0 h-screen overflow-hidden flex flex-col">
+<!-- TopAppBar JSON execution -->
+<header class="docked full-width top-0 bg-surface-container-lowest border-b border-outline-variant flat no shadows flex justify-between items-center w-full px-margin-mobile py-2 z-50 shrink-0">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full overflow-hidden bg-surface-variant flex-shrink-0">
+<img alt="User Profile" class="w-full h-full object-cover" data-alt="A professional headshot photo of a male college student in his early twenties, looking directly at the camera with a neutral expression. The lighting is soft and even, highlighting his features. He is wearing a simple dark t-shirt. The background is a solid, slightly darker shade to contrast with the subject. The overall style is clean, modern, and realistic, suitable for an app profile picture." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA3MVQ1NGra-xgtZzUPw2Ir49hvgKcPFZ4PfgIAi5qfXPze0p3An8TuFWpQpWso4ZiwRdxFvUySH2SxMWqGpy5rbQcfvhELgp7zma6V30JhzmKtHRsZaLO_qJa4OKy3BYmQyWVyPeSB7PedIsC91yr6YcotD9riHRhEZXxK53HtZY-okbjJEc4GBxBxgET1jKpkKYk_LHfmfYAeZ2piHxmoiWq6OlGGrceulhevo2WaGNEaA0JG7iCzNocABVUAiy6X0M2CdWw7HNc"/>
+</div>
+<h1 class="text-headline-sm font-headline-sm font-bold text-primary">College Mesh</h1>
+</div>
+<button aria-label="Notifications" class="w-10 h-10 flex items-center justify-center rounded-full text-on-surface-variant hover:bg-surface-variant transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+</header>
+<!-- Main Content Area -->
+<main class="flex-1 overflow-y-auto px-margin-mobile pt-4 pb-lg">
+<!-- Search and Filters Section -->
+<div class="sticky top-0 bg-background z-40 pb-4">
+<h2 class="text-headline-md font-headline-md mb-4">Faculty Locator</h2>
+<!-- Search Bar -->
+<div class="relative mb-4">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline">search</span>
+<input class="w-full bg-surface-container-lowest border border-outline-variant text-on-surface text-body-md font-body-md rounded-lg py-2 pl-10 pr-4 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors shadow-sm" placeholder="Search faculty, department, or cabin..." type="text"/>
+</div>
+<!-- Horizontal Sliding Filters -->
+<div class="flex gap-2 overflow-x-auto hide-scrollbar pb-1">
+<button class="shrink-0 bg-primary text-on-primary text-label-md font-label-md px-4 py-1.5 rounded-full border border-transparent whitespace-nowrap shadow-sm">
+                    All Departments
+                </button>
+<button class="shrink-0 bg-surface-container-lowest text-on-surface-variant text-label-md font-label-md px-4 py-1.5 rounded-full border border-outline-variant hover:border-outline transition-colors whitespace-nowrap shadow-sm">
+                    Computer Science
+                </button>
+<button class="shrink-0 bg-surface-container-lowest text-on-surface-variant text-label-md font-label-md px-4 py-1.5 rounded-full border border-outline-variant hover:border-outline transition-colors whitespace-nowrap shadow-sm">
+                    Mechanical
+                </button>
+<button class="shrink-0 bg-surface-container-lowest text-on-surface-variant text-label-md font-label-md px-4 py-1.5 rounded-full border border-outline-variant hover:border-outline transition-colors whitespace-nowrap shadow-sm">
+                    Civil
+                </button>
+<button class="shrink-0 bg-surface-container-lowest text-on-surface-variant text-label-md font-label-md px-4 py-1.5 rounded-full border border-outline-variant hover:border-outline transition-colors whitespace-nowrap shadow-sm">
+                    Block A
+                </button>
+<button class="shrink-0 bg-surface-container-lowest text-on-surface-variant text-label-md font-label-md px-4 py-1.5 rounded-full border border-outline-variant hover:border-outline transition-colors whitespace-nowrap shadow-sm">
+                    Floor 2
+                </button>
+</div>
+</div>
+<!-- Faculty List -->
+<div class="flex flex-col gap-3">
+<!-- Card 1 -->
+<div class="bg-surface-container-lowest rounded-lg p-3 flex items-center gap-3 border border-outline-variant shadow-sm">
+<img class="w-12 h-12 rounded-full object-cover shrink-0" data-alt="A professional headshot photo of a male professor in his late forties, wearing glasses and a neat collared shirt. He looks approachable with a slight smile. The background is a solid, slightly darker shade. The overall style is clean, modern, and realistic, suitable for a faculty directory." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDdvX1BgWHXWfHkM5TZ9KeqKsgbdRjKGNaki8B7xtdjKMTBU0NOfITW_TVgF-LDiQZ8CgDXTKoE_nFdsxb1ngWrJQ3NdLh_nJfZ1rfvifQQ-FaVtRtiBB4g-eMQLxKmKQ_ksd-B3JFK2z9oy7iuMkpLgCUS5rPY5onoffd7Ou6K7onMgyiGparF5udCHHwb0Ez8qvq5iRY3oYhCIgF2MlA2Ny0xgDKkl4bWZLIppWKLdP8mMAue_qBmBOEHgP4toMOW6_D4xOtTVYc"/>
+<div class="flex-1 min-w-0">
+<div class="flex justify-between items-start mb-1">
+<h3 class="text-body-lg font-body-lg font-semibold truncate text-on-surface">Dr. Alan Turing</h3>
+<span class="shrink-0 inline-block px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-green-100 text-green-800 border border-green-300">Available</span>
+</div>
+<div class="flex items-center gap-2 mb-1.5">
+<span class="text-label-sm font-label-sm bg-surface-variant text-on-surface-variant px-1.5 py-0.5 rounded">Computer Science</span>
+</div>
+<div class="flex items-center gap-3 text-label-md font-label-md text-on-surface-variant">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">meeting_room</span> C-302</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">business</span> Block C</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">layers</span> Flr 3</span>
+</div>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="bg-surface-container-lowest rounded-lg p-3 flex items-center gap-3 border border-outline-variant shadow-sm opacity-75">
+<img class="w-12 h-12 rounded-full object-cover shrink-0 grayscale-[50%]" data-alt="A professional headshot photo of a female professor in her mid-thirties, with shoulder-length dark hair. She is wearing a professional blazer. She looks focused and competent. The background is a solid, slightly darker shade. The overall style is clean, modern, and realistic, suitable for a faculty directory." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDN63-mVUkxG1FCTjJNlzxELMdSO8fZprBNsxHhTrKqiyVjgis_qlIB4FOvXVMchzXGAsgUoMmt4wmv3XFjIKwMpVcxSq34jFnfAG1YuMCJQx68k0XjJDQzg4XY3MYRhqcFIsdMGLcFmLrI0nGZ5v00nuBLE6l6oEoW-e2iUyE1ag0KoK_mfMjAy1dGL0yoiMWMhWtfMd-TwrrUlJRDbR8iffJnlDuL1M-4s6tK9UfFVCt_PRevIHXfwoYxbOPSWVY6bskZrnuphyM"/>
+<div class="flex-1 min-w-0">
+<div class="flex justify-between items-start mb-1">
+<h3 class="text-body-lg font-body-lg font-semibold truncate text-on-surface">Prof. Grace Hopper</h3>
+<span class="shrink-0 inline-block px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-red-100 text-red-800 border border-red-300">In Class</span>
+</div>
+<div class="flex items-center gap-2 mb-1.5">
+<span class="text-label-sm font-label-sm bg-surface-variant text-on-surface-variant px-1.5 py-0.5 rounded">Information Tech</span>
+</div>
+<div class="flex items-center gap-3 text-label-md font-label-md text-on-surface-variant">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">meeting_room</span> L-104</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">business</span> Block A</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">layers</span> Flr 1</span>
+</div>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="bg-surface-container-lowest rounded-lg p-3 flex items-center gap-3 border border-outline-variant shadow-sm">
+<div class="w-12 h-12 rounded-full bg-surface-variant flex items-center justify-center shrink-0 text-on-surface-variant text-headline-md font-headline-md font-bold">NT</div>
+<div class="flex-1 min-w-0">
+<div class="flex justify-between items-start mb-1">
+<h3 class="text-body-lg font-body-lg font-semibold truncate text-on-surface">Dr. Nikola Tesla</h3>
+<span class="shrink-0 inline-block px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-yellow-100 text-yellow-800 border border-yellow-300">Meeting</span>
+</div>
+<div class="flex items-center gap-2 mb-1.5">
+<span class="text-label-sm font-label-sm bg-surface-variant text-on-surface-variant px-1.5 py-0.5 rounded">Electrical Eng</span>
+</div>
+<div class="flex items-center gap-3 text-label-md font-label-md text-on-surface-variant">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">meeting_room</span> E-210</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">business</span> Block E</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">layers</span> Flr 2</span>
+</div>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="bg-surface-container-lowest rounded-lg p-3 flex items-center gap-3 border border-outline-variant shadow-sm opacity-50">
+<img class="w-12 h-12 rounded-full object-cover shrink-0 grayscale" data-alt="A professional headshot photo of a male professor in his late fifties, with grey hair and a beard. He is wearing a simple sweater. The background is a solid, slightly darker shade. The overall style is clean, modern, and realistic, suitable for a faculty directory." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCgpyCzBgJUGGZRMzALq1p-ir9jARvHlnFJyOut-GkM8cGA9TEIKz0opkFhRvpdVbRUS-2_MGQy7dJdZWDuv8mROggFvFPdGbXWWTNaO339rbt5zOWYPDvs2PigJxGyn-ZA7XTxir0QkcviE1xTn7Nqd6kdk-9ZD0HZwAzW5tASqltP99sLZ5QwZoMe_3x7o3Ps-UxUXm2QKxJhyY3JEnsgcwRTTiIllQ2jgHvEhQ7EFfZhm4CmbHXSHuubKxaJ_iAxrfg5C1j7JlA"/>
+<div class="flex-1 min-w-0">
+<div class="flex justify-between items-start mb-1">
+<h3 class="text-body-lg font-body-lg font-semibold truncate text-on-surface">Prof. John von Neumann</h3>
+<span class="shrink-0 inline-block px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-surface-variant text-on-surface-variant border border-outline-variant">On Leave</span>
+</div>
+<div class="flex items-center gap-2 mb-1.5">
+<span class="text-label-sm font-label-sm bg-surface-variant text-on-surface-variant px-1.5 py-0.5 rounded">Mathematics</span>
+</div>
+<div class="flex items-center gap-3 text-label-md font-label-md text-on-surface-variant">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">meeting_room</span> M-405</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">business</span> Block B</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">layers</span> Flr 4</span>
+</div>
+</div>
+</div>
+<!-- Status Legend Placeholder (Hidden visually, but present for data reference) -->
+<img alt="Status Legend Reference" class="hidden" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBWxOp0QE1_WfhIpalxkMf8djhGHvNs1_Ybbfvw9v67mkluBItKA62hwZzlQzvTByTZVxpQxuZxB4773GlRB7LA8f7DIXssx34dz7hVv3GPKBvcnC8ia9kGVKQmAinli3brb-vYWigabOZ6GPII3IUI8x-_TMCOb3z_QWDoGpBpg42iP3cQ0qw7L-YuNduYZrm1R8y18UQ1Qm7KbqRIzqInxBYslLaNyqSJ5fdl-aXzEq5nJcBYaMyrpkG-cMBlh-IjFIpXd5xYO9U"/>
+</div>
+</main>
+<!-- BottomNavBar JSON execution - Modified for 7 items as requested -->
+<nav class="md:hidden docked full-width bottom-0 bg-surface-container-lowest border-t border-outline-variant flat no shadows fixed left-0 w-full z-50 flex justify-between items-center pb-2 pt-1 overflow-x-auto hide-scrollbar whitespace-nowrap"><!-- Dashboard -->
+<button class="flex flex-col items-center justify-center text-on-surface-variant px-3 py-1 hover:text-primary shrink-0" style="width: 20%; min-width: 20%;">
+<span class="material-symbols-outlined mb-1 text-[24px]">dashboard</span>
+<span class="text-label-sm font-label-sm">Dashboard</span>
+</button>
+<!-- Chat -->
+<button class="flex flex-col items-center justify-center text-on-surface-variant px-3 py-1 hover:text-primary shrink-0" style="width: 20%; min-width: 20%;">
+<span class="material-symbols-outlined mb-1 text-[24px]">forum</span>
+<span class="text-label-sm font-label-sm">Chat</span>
+</button>
+<!-- Programs -->
+<button class="flex flex-col items-center justify-center text-on-surface-variant px-3 py-1 hover:text-primary shrink-0" style="width: 20%; min-width: 20%;">
+<span class="material-symbols-outlined mb-1 text-[24px]">school</span>
+<span class="text-label-sm font-label-sm">Programs</span>
+</button>
+<!-- Faculty (Active) -->
+<button class="flex flex-col items-center justify-center text-primary bg-primary-container rounded-xl px-3 py-1 shrink-0 scale-90 transition-transform" style="width: 20%; min-width: 20%;">
+<span class="material-symbols-outlined mb-1 text-[24px]" style="font-variation-settings: 'FILL' 1;">supervisor_account</span>
+<span class="text-label-sm font-label-sm font-bold">Faculty</span>
+</button>
+<!-- Rooms -->
+<button class="flex flex-col items-center justify-center text-on-surface-variant px-3 py-1 hover:text-primary shrink-0" style="width: 20%; min-width: 20%;">
+<span class="material-symbols-outlined mb-1 text-[24px]">meeting_room</span>
+<span class="text-label-sm font-label-sm">Rooms</span>
+</button>
+<!-- Events -->
+<button class="flex flex-col items-center justify-center text-on-surface-variant px-3 py-1 hover:text-primary shrink-0" style="width: 20%; min-width: 20%;">
+<span class="material-symbols-outlined mb-1 text-[24px]">calendar_today</span>
+<span class="text-label-sm font-label-sm">Events</span>
+</button>
+<!-- Admin -->
+<button class="flex flex-col items-center justify-center text-on-surface-variant px-3 py-1 hover:text-primary shrink-0" style="width: 20%; min-width: 20%;">
+<span class="material-symbols-outlined mb-1 text-[24px]">admin_panel_settings</span>
+<span class="text-label-sm font-label-sm">Admin</span>
+</button></nav>
+<!-- Desktop Sidebar (Hidden on mobile) -->
+<aside class="hidden md:flex fixed inset-y-0 left-0 z-[60] flex flex-col p-4 bg-surface-container-lowest border-r border-outline-variant rounded-r-xl h-full w-64 max-w-sm shadow-lg">
+<div class="flex items-center gap-3 mb-8 px-2">
+<div class="w-10 h-10 rounded-full overflow-hidden bg-surface-variant flex-shrink-0">
+<img alt="Student Profile Photo" class="w-full h-full object-cover" data-alt="A professional headshot photo of a male college student in his early twenties, looking directly at the camera with a neutral expression. The lighting is soft and even, highlighting his features. He is wearing a simple dark t-shirt. The background is a solid, slightly darker shade to contrast with the subject. The overall style is clean, modern, and realistic, suitable for an app profile picture." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAppNq4HthfV9Zjia0CX8XH_gvU0CILtK8KRkZaHropZZoV7LZlfYX79QktsVhE_0_axvxxVaZMw3EsXHkihLF27cxozgXOyrUSb2WR6V_rNENXvMXIz6pi_t0dM5g9ubMU7Pm3xTF2zcIpPWmaz0I3u9ymp_p-VRRZE7HDeEQS3AVwcmw6r98sdnc5lXSfMiCJjIb3McBclO2rvBgzPcZl7V2zRSAV8wKj8uqfUo01eeE-9_BQxw2TjgllIK0dDz0YDNj8jGKcm98"/>
+</div>
+<div>
+<div class="text-headline-sm font-headline-sm font-bold text-primary">Akshatha N.</div>
+<div class="text-label-md font-label-md text-on-surface-variant">Student • 4th Sem</div>
+<div class="text-[10px] text-outline">SJEC-2025-26</div>
+</div>
+</div>
+<nav class="flex flex-col gap-2 flex-1">
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:bg-surface-variant rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined">book</span>
+<span class="text-label-md font-label-md">My Courses</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:bg-surface-variant rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined">meeting_room</span>
+<span class="text-label-md font-label-md">Room Finder</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 bg-primary text-on-primary font-bold rounded-lg transition-colors shadow-sm" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">supervisor_account</span>
+<span class="text-label-md font-label-md">Faculty Locator</span>
+</a>
+</nav>
+<div class="mt-auto">
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:bg-surface-variant rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="text-label-md font-label-md">Settings</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:bg-surface-variant rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined">logout</span>
+<span class="text-label-md font-label-md">Log Out</span>
+</a>
+</div>
+</aside>
+</body></html>

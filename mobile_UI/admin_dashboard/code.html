@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Admin Dashboard - College Mesh</title>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&amp;family=Hanken+Grotesk:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .icon-fill {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        
+        /* Hide scrollbar for clean horizontal scrolls */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+<!-- Tailwind Config from Design System -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#6750a4",
+                        "on-primary": "#ffffff",
+                        "primary-container": "#eaddff",
+                        "on-primary-container": "#21005d",
+                        "secondary": "#625b71",
+                        "on-secondary": "#ffffff",
+                        "secondary-container": "#e8def8",
+                        "on-secondary-container": "#1d192b",
+                        "tertiary": "#7d5260",
+                        "on-tertiary": "#ffffff",
+                        "tertiary-container": "#ffd8e4",
+                        "on-tertiary-container": "#31111d",
+                        "error": "#b3261e",
+                        "on-error": "#ffffff",
+                        "error-container": "#f9dedc",
+                        "on-error-container": "#410e0b",
+                        "background": "#f8f9fa",
+                        "on-background": "#1a1c1e",
+                        "surface": "#f8f9fa",
+                        "on-surface": "#1a1c1e",
+                        "surface-variant": "#e2e4e5",
+                        "on-surface-variant": "#44474e",
+                        "outline": "#74777f",
+                        "outline-variant": "#c4c6d0",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container-low": "#f3f4f5",
+                        "surface-container": "#eeeff0",
+                        "surface-container-high": "#e8eaeb",
+                        "surface-container-highest": "#e2e4e5",
+                        "surface-bright": "#f8f9fa",
+                        "surface-dim": "#d9dadb",
+                        "primary-fixed": "#eaddff",
+                        "primary-fixed-dim": "#6750a4",
+                        "on-primary-fixed": "#21005d",
+                        "on-primary-fixed-variant": "#4f378b",
+                        "secondary-fixed": "#e8def8",
+                        "secondary-fixed-dim": "#625b71",
+                        "on-secondary-fixed": "#1d192b",
+                        "on-secondary-fixed-variant": "#4a4458",
+                        "tertiary-fixed": "#ffd8e4",
+                        "tertiary-fixed-dim": "#7d5260",
+                        "on-tertiary-fixed": "#31111d",
+                        "on-tertiary-fixed-variant": "#633b48",
+                        "inverse-surface": "#2f3033",
+                        "inverse-on-surface": "#f1f0f4",
+                        "inverse-primary": "#d0bcff",
+                        "surface-tint": "#6750a4"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    spacing: {
+                        "md": "16px",
+                        "margin-desktop": "32px",
+                        "sm": "8px",
+                        "gutter": "12px",
+                        "xs": "4px",
+                        "margin-mobile": "16px",
+                        "lg": "24px",
+                        "base": "4px",
+                        "xl": "32px"
+                    },
+                    fontFamily: {
+                        "label-sm": ["Geist"],
+                        "headline-md": ["Hanken Grotesk"],
+                        "body-lg": ["Hanken Grotesk"],
+                        "label-md": ["Geist"],
+                        "display-lg": ["Hanken Grotesk"],
+                        "body-md": ["Hanken Grotesk"],
+                        "headline-sm": ["Hanken Grotesk"]
+                    },
+                    fontSize: {
+                        "label-sm": ["10px", { "lineHeight": "12px", "fontWeight": "600" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500" }],
+                        "display-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="bg-background text-on-surface font-body-md antialiased min-h-screen">
+<!-- TopAppBar -->
+<header class="fixed docked full-width top-0 bg-surface-container-low border-b border-outline-variant flex justify-between items-center w-full px-margin-mobile py-2 z-50">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-surface-variant flex items-center justify-center overflow-hidden shrink-0 border border-outline-variant">
+<span class="material-symbols-outlined text-on-surface-variant" style="font-size: 20px;">person</span>
+</div>
+<h1 class="text-headline-sm font-headline-sm font-bold text-primary">Admin Panel</h1>
+</div>
+<div class="flex items-center gap-2">
+<button class="w-8 h-8 rounded-full hover:bg-surface-variant flex items-center justify-center transition-all duration-150">
+<span class="material-symbols-outlined text-on-surface-variant">notifications</span>
+</button>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="pt-16 pb-24 px-4 flex flex-col gap-6">
+<!-- Tabs -->
+<section class="-mx-4 px-4 overflow-x-auto no-scrollbar">
+<div class="flex gap-2 w-max">
+<button class="px-4 py-2 rounded-lg bg-primary-container text-on-primary-container font-label-md text-label-md font-bold">Overview</button>
+<button class="px-4 py-2 rounded-lg text-on-surface-variant hover:bg-surface-variant font-label-md text-label-md transition-colors">Users</button>
+<button class="px-4 py-2 rounded-lg text-on-surface-variant hover:bg-surface-variant font-label-md text-label-md transition-colors">Rooms</button>
+<button class="px-4 py-2 rounded-lg text-on-surface-variant hover:bg-surface-variant font-label-md text-label-md transition-colors">Events</button>
+</div>
+</section>
+<!-- Overview Stats Grid -->
+<section class="grid grid-cols-2 gap-3">
+<!-- Total Users -->
+<div class="bg-surface-container rounded-xl p-3 flex flex-col gap-1 border border-outline-variant/30">
+<div class="flex items-center justify-between">
+<span class="text-label-md font-label-md text-on-surface-variant uppercase">Total users</span>
+<span class="material-symbols-outlined text-primary text-[18px]">group</span>
+</div>
+<div class="text-display-lg font-display-lg text-on-surface mt-1">842</div>
+</div>
+<!-- Active Rooms -->
+<div class="bg-surface-container rounded-xl p-3 flex flex-col gap-1 border border-outline-variant/30">
+<div class="flex items-center justify-between">
+<span class="text-label-md font-label-md text-on-surface-variant uppercase">Active rooms</span>
+<span class="material-symbols-outlined text-tertiary text-[18px]">door_open</span>
+</div>
+<div class="text-display-lg font-display-lg text-on-surface mt-1">38</div>
+</div>
+<!-- Programs -->
+<div class="bg-surface-container rounded-xl p-3 flex flex-col gap-1 border border-outline-variant/30">
+<div class="flex items-center justify-between">
+<span class="text-label-md font-label-md text-on-surface-variant uppercase">Programs</span>
+<span class="material-symbols-outlined text-secondary text-[18px]">school</span>
+</div>
+<div class="text-display-lg font-display-lg text-on-surface mt-1">64</div>
+</div>
+<!-- Events -->
+<div class="bg-surface-container rounded-xl p-3 flex flex-col gap-1 border border-outline-variant/30">
+<div class="flex items-center justify-between">
+<span class="text-label-md font-label-md text-on-surface-variant uppercase">Events</span>
+<span class="material-symbols-outlined text-error text-[18px]">event</span>
+</div>
+<div class="text-display-lg font-display-lg text-on-surface mt-1">5</div>
+</div>
+</section>
+<!-- Quick Actions -->
+<section class="flex flex-col gap-3">
+<h2 class="text-label-md font-label-md text-on-surface-variant uppercase tracking-wider">Quick Actions</h2>
+<div class="flex gap-2 overflow-x-auto no-scrollbar -mx-4 px-4 pb-1">
+<button class="flex items-center gap-2 bg-surface-container-high hover:bg-surface-variant text-primary border border-outline-variant rounded-lg px-4 py-2 shrink-0 transition-colors">
+<span class="material-symbols-outlined text-[18px]">add_circle</span>
+<span class="font-label-md text-label-md">Add notice</span>
+</button>
+<button class="flex items-center gap-2 bg-surface-container-high hover:bg-surface-variant text-tertiary border border-outline-variant rounded-lg px-4 py-2 shrink-0 transition-colors">
+<span class="material-symbols-outlined text-[18px]">event_available</span>
+<span class="font-label-md text-label-md">Create event</span>
+</button>
+<button class="flex items-center gap-2 bg-surface-container-high hover:bg-surface-variant text-secondary border border-outline-variant rounded-lg px-4 py-2 shrink-0 transition-colors">
+<span class="material-symbols-outlined text-[18px]">room_preferences</span>
+<span class="font-label-md text-label-md">Manage room slots</span>
+</button>
+</div>
+</section>
+<!-- User Management (Cards) -->
+<section class="flex flex-col gap-3">
+<div class="flex justify-between items-end">
+<h2 class="text-label-md font-label-md text-on-surface-variant uppercase tracking-wider">User Management</h2>
+<button class="text-primary text-label-sm font-label-sm uppercase hover:underline">View All</button>
+</div>
+<div class="flex flex-col gap-2">
+<!-- User Card 1 -->
+<div class="bg-surface-container-low border border-outline-variant/50 rounded-lg p-3 flex justify-between items-center">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center font-bold text-label-md shrink-0">
+                            AN
+                        </div>
+<div class="flex flex-col">
+<span class="text-body-md font-body-md font-semibold text-on-surface">Akshatha N.</span>
+<span class="text-label-sm font-label-sm text-on-surface-variant">CSE • Student</span>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<span class="px-2 py-0.5 rounded-sm bg-surface-variant text-on-surface-variant text-label-sm font-label-sm border border-outline-variant/50">Active</span>
+<button class="text-on-surface-variant hover:text-primary transition-colors"><span class="material-symbols-outlined text-[20px]">more_vert</span></button>
+</div>
+</div>
+<!-- User Card 2 -->
+<div class="bg-surface-container-low border border-outline-variant/50 rounded-lg p-3 flex justify-between items-center">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center font-bold text-label-md shrink-0">
+                            PR
+                        </div>
+<div class="flex flex-col">
+<span class="text-body-md font-body-md font-semibold text-on-surface">Prof. Rakshitha</span>
+<span class="text-label-sm font-label-sm text-on-surface-variant">CSE • Faculty</span>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<span class="px-2 py-0.5 rounded-sm bg-surface-variant text-on-surface-variant text-label-sm font-label-sm border border-outline-variant/50">Active</span>
+<button class="text-on-surface-variant hover:text-primary transition-colors"><span class="material-symbols-outlined text-[20px]">more_vert</span></button>
+</div>
+</div>
+<!-- User Card 3 -->
+<div class="bg-surface-container-low border border-outline-variant/50 rounded-lg p-3 flex justify-between items-center opacity-70">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-surface-variant text-on-surface-variant flex items-center justify-center font-bold text-label-md shrink-0">
+                            DM
+                        </div>
+<div class="flex flex-col">
+<span class="text-body-md font-body-md font-semibold text-on-surface">Deekshith M.</span>
+<span class="text-label-sm font-label-sm text-on-surface-variant">ME • Student</span>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<span class="px-2 py-0.5 rounded-sm bg-error-container text-on-error-container text-label-sm font-label-sm border border-error-container/50">Inactive</span>
+<button class="text-on-surface-variant hover:text-primary transition-colors"><span class="material-symbols-outlined text-[20px]">more_vert</span></button>
+</div>
+</div>
+</div>
+</section>
+<!-- Branch Activity & Reports Multi-column on mobile -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<!-- Branch Activity -->
+<section class="flex flex-col gap-3 bg-surface-container-low border border-outline-variant/30 rounded-xl p-4">
+<h2 class="text-label-md font-label-md text-on-surface-variant uppercase tracking-wider mb-1">Branch Activity</h2>
+<div class="flex flex-col gap-3">
+<!-- CSE -->
+<div class="flex items-center gap-3">
+<span class="w-8 text-label-sm font-label-sm text-on-surface font-bold">CSE</span>
+<div class="flex-1 h-2 bg-surface-variant rounded-full overflow-hidden">
+<div class="h-full bg-primary rounded-full" style="width: 82%"></div>
+</div>
+<span class="w-8 text-right text-label-sm font-label-sm text-on-surface-variant">82%</span>
+</div>
+<!-- EC -->
+<div class="flex items-center gap-3">
+<span class="w-8 text-label-sm font-label-sm text-on-surface font-bold">EC</span>
+<div class="flex-1 h-2 bg-surface-variant rounded-full overflow-hidden">
+<div class="h-full bg-secondary rounded-full" style="width: 65%"></div>
+</div>
+<span class="w-8 text-right text-label-sm font-label-sm text-on-surface-variant">65%</span>
+</div>
+<!-- ME -->
+<div class="flex items-center gap-3">
+<span class="w-8 text-label-sm font-label-sm text-on-surface font-bold">ME</span>
+<div class="flex-1 h-2 bg-surface-variant rounded-full overflow-hidden">
+<div class="h-full bg-tertiary rounded-full" style="width: 48%"></div>
+</div>
+<span class="w-8 text-right text-label-sm font-label-sm text-on-surface-variant">48%</span>
+</div>
+<!-- CV -->
+<div class="flex items-center gap-3">
+<span class="w-8 text-label-sm font-label-sm text-on-surface font-bold">CV</span>
+<div class="flex-1 h-2 bg-surface-variant rounded-full overflow-hidden">
+<div class="h-full bg-outline rounded-full" style="width: 31%"></div>
+</div>
+<span class="w-8 text-right text-label-sm font-label-sm text-on-surface-variant">31%</span>
+</div>
+</div>
+</section>
+<!-- Recent Activity Timeline -->
+<section class="flex flex-col gap-3">
+<h2 class="text-label-md font-label-md text-on-surface-variant uppercase tracking-wider">Recent Admin Actions</h2>
+<div class="relative pl-3 border-l-2 border-surface-variant flex flex-col gap-4 ml-2 mt-1">
+<div class="relative">
+<div class="absolute -left-[19px] top-1 w-3 h-3 rounded-full bg-primary border-2 border-background"></div>
+<p class="text-body-md font-body-md text-on-surface leading-tight">Notice added to CSE department</p>
+<span class="text-label-sm font-label-sm text-on-surface-variant">10 mins ago</span>
+</div>
+<div class="relative">
+<div class="absolute -left-[19px] top-1 w-3 h-3 rounded-full bg-secondary border-2 border-background"></div>
+<p class="text-body-md font-body-md text-on-surface leading-tight">System backup completed</p>
+<span class="text-label-sm font-label-sm text-on-surface-variant">1 hr ago</span>
+</div>
+<div class="relative">
+<div class="absolute -left-[19px] top-1 w-3 h-3 rounded-full bg-surface-variant border-2 border-background"></div>
+<p class="text-body-md font-body-md text-on-surface leading-tight">Room 302 marked as under maintenance</p>
+<span class="text-label-sm font-label-sm text-on-surface-variant">3 hrs ago</span>
+</div>
+</div>
+</section>
+</div>
+</main>
+<!-- BottomNavBar (Strict adherence to JSON spec for Semantic Shell) -->
+<nav class="fixed bottom-0 left-0 w-full z-50 bg-surface-container border-t border-outline-variant/30 overflow-x-auto no-scrollbar">
+<div class="flex items-center w-max py-2">
+<!-- Dashboard -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant py-1 hover:text-primary transition-colors shrink-0 w-[20vw]" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-label-sm font-label-sm mt-0.5">Dashboard</span>
+</a>
+<!-- Chat -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant py-1 hover:text-primary transition-colors shrink-0 w-[20vw]" href="#">
+<span class="material-symbols-outlined">forum</span>
+<span class="text-label-sm font-label-sm mt-0.5">Chat</span>
+</a>
+<!-- Programs -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant py-1 hover:text-primary transition-colors shrink-0 w-[20vw]" href="#">
+<span class="material-symbols-outlined">school</span>
+<span class="text-label-sm font-label-sm mt-0.5">Programs</span>
+</a>
+<!-- Faculty -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant py-1 hover:text-primary transition-colors shrink-0 w-[20vw]" href="#">
+<span class="material-symbols-outlined">supervisor_account</span>
+<span class="text-label-sm font-label-sm mt-0.5">Faculty</span>
+</a>
+<!-- Rooms -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant py-1 hover:text-primary transition-colors shrink-0 w-[20vw]" href="#">
+<span class="material-symbols-outlined">meeting_room</span>
+<span class="text-label-sm font-label-sm mt-0.5">Rooms</span>
+</a>
+<!-- Events -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant py-1 hover:text-primary transition-colors shrink-0 w-[20vw]" href="#">
+<span class="material-symbols-outlined">calendar_today</span>
+<span class="text-label-sm font-label-sm mt-0.5">Events</span>
+</a>
+<!-- Admin (Active) -->
+<a class="flex flex-col items-center justify-center text-primary bg-secondary-container/50 rounded-xl py-1 active-nav scale-[0.95] transition-transform shrink-0 w-[20vw]" href="#">
+<span class="material-symbols-outlined icon-fill">admin_panel_settings</span>
+<span class="text-label-sm font-label-sm mt-0.5">Admin</span>
+</a>
+</div>
+</nav>
+</body></html>

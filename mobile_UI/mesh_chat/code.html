@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Mesh Chat - College Mesh</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&amp;family=Hanken+Grotesk:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary": "#7c3aed",
+                        "on-primary": "#ffffff",
+                        "primary-container": "#ede9fe",
+                        "on-primary-container": "#4c1d95",
+                        "secondary": "#6366f1",
+                        "on-secondary": "#ffffff",
+                        "secondary-container": "#e0e7ff",
+                        "on-secondary-container": "#312e81",
+                        "tertiary": "#ec4899",
+                        "on-tertiary": "#ffffff",
+                        "tertiary-container": "#fce7f3",
+                        "on-tertiary-container": "#831843",
+                        "error": "#ba1a1a",
+                        "on-error": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "on-error-container": "#410002",
+                        "background": "#f8f9fa",
+                        "on-background": "#212529",
+                        "surface": "#f8f9fa",
+                        "on-surface": "#212529",
+                        "surface-variant": "#e9ecef",
+                        "on-surface-variant": "#495057",
+                        "outline": "#adb5bd",
+                        "outline-variant": "#dee2e6",
+                        "inverse-surface": "#212529",
+                        "inverse-on-surface": "#f8f9fa",
+                        "inverse-primary": "#c4b5fd",
+                        "surface-dim": "#d9dadb",
+                        "surface-bright": "#f8f9fa",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container-low": "#f3f4f5",
+                        "surface-container": "#e9ecef",
+                        "surface-container-high": "#dee2e6",
+                        "surface-container-highest": "#ced4da"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "base": "4px",
+                        "xl": "32px",
+                        "gutter": "12px",
+                        "xs": "4px",
+                        "md": "16px",
+                        "margin-mobile": "16px",
+                        "sm": "8px",
+                        "margin-desktop": "32px",
+                        "lg": "24px"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["Hanken Grotesk"],
+                        "headline-sm": ["Hanken Grotesk"],
+                        "display-lg": ["Hanken Grotesk"],
+                        "body-md": ["Hanken Grotesk"],
+                        "label-md": ["Geist"],
+                        "body-lg": ["Hanken Grotesk"],
+                        "label-sm": ["Geist"]
+                    },
+                    "fontSize": {
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "display-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500" }],
+                        "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "label-sm": ["10px", { "lineHeight": "12px", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { font-family: 'Hanken Grotesk', sans-serif; }
+        .material-symbols-outlined { font-family: 'Material Symbols Outlined'; }
+        /* Hide scrollbar for clean look but keep functionality */
+        ::-webkit-scrollbar { width: 0px; background: transparent; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="bg-background text-on-background h-screen flex flex-col overflow-hidden">
+<!-- TopAppBar -->
+<header class="flex justify-between items-center w-full px-margin-mobile py-2 z-50 bg-surface-container-low border-b border-outline-variant flex-shrink-0">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center font-bold text-sm">
+                AK
+            </div>
+<div class="flex flex-col">
+<span class="text-headline-sm font-headline-sm font-bold text-primary"># general</span>
+<span class="text-label-sm font-label-sm text-on-surface-variant flex items-center gap-1">
+<span class="w-2 h-2 rounded-full bg-green-500"></span> 14 online
+                </span>
+</div>
+</div>
+<div class="flex items-center gap-4 text-on-surface-variant">
+<span class="material-symbols-outlined cursor-pointer hover:text-primary transition-colors">search</span>
+<span class="material-symbols-outlined cursor-pointer hover:text-primary transition-colors">group</span>
+</div>
+</header>
+<!-- Main Content Area -->
+<main class="flex-1 flex flex-col overflow-hidden relative">
+<!-- Tabs (Channels / Direct Messages) -->
+<div class="flex w-full bg-surface-container-high border-b border-outline-variant flex-shrink-0">
+<button class="flex-1 py-3 text-label-md font-label-md text-primary border-b-2 border-primary transition-colors" id="tab-channels" onclick="switchTab('channels')">Channels</button>
+<button class="flex-1 py-3 text-label-md font-label-md text-on-surface-variant border-b-2 border-transparent hover:text-primary transition-colors" id="tab-dms" onclick="switchTab('dms')">Direct msgs</button>
+</div>
+<!-- Chat Area & Sidebars Container -->
+<div class="flex-1 flex overflow-hidden relative">
+<!-- Mobile Sidebar Overlay (Hidden by default, shown via JS if needed, but keeping it flat for now) -->
+<!-- Chat Feed -->
+<div class="flex-1 flex flex-col bg-surface overflow-y-auto pb-20">
+<!-- Chat Messages -->
+<div class="flex-1 p-4 flex flex-col gap-6 overflow-y-auto">
+<!-- Message 1 -->
+<div class="flex gap-3">
+<div class="w-8 h-8 rounded-full bg-surface-variant text-on-surface flex justify-center items-center font-bold text-xs flex-shrink-0">
+                            AN
+                        </div>
+<div class="flex flex-col">
+<div class="flex items-baseline gap-2">
+<span class="text-body-md font-bold text-on-surface">Ananya</span>
+<span class="text-label-sm text-on-surface-variant">9:12 am</span>
+</div>
+<div class="bg-surface-container-high p-3 rounded-xl rounded-tl-sm mt-1 text-body-md text-on-surface inline-block max-w-[85%]">
+                                Hey everyone, DBMS lab report is due today!
+                            </div>
+</div>
+</div>
+<!-- Message 2 -->
+<div class="flex gap-3">
+<div class="w-8 h-8 rounded-full bg-surface-variant text-on-surface flex justify-center items-center font-bold text-xs flex-shrink-0">
+                            DP
+                        </div>
+<div class="flex flex-col">
+<div class="flex items-baseline gap-2">
+<span class="text-body-md font-bold text-on-surface">Deekshith</span>
+<span class="text-label-sm text-on-surface-variant">9:14 am</span>
+</div>
+<div class="bg-surface-container-high p-3 rounded-xl rounded-tl-sm mt-1 text-body-md text-on-surface inline-block max-w-[85%]">
+                                Already submitted mine 😅 who needs help?
+                            </div>
+</div>
+</div>
+<!-- Message 3 -->
+<div class="flex gap-3">
+<div class="w-8 h-8 rounded-full bg-surface-variant text-on-surface flex justify-center items-center font-bold text-xs flex-shrink-0">
+                            AS
+                        </div>
+<div class="flex flex-col">
+<div class="flex items-baseline gap-2">
+<span class="text-body-md font-bold text-on-surface">Anusha</span>
+<span class="text-label-sm text-on-surface-variant">9:15 am</span>
+</div>
+<div class="bg-surface-container-high p-3 rounded-xl rounded-tl-sm mt-1 text-body-md text-on-surface inline-block max-w-[85%]">
+                                Can someone share the ER diagram template?
+                            </div>
+</div>
+</div>
+<!-- Message 4 (Self) -->
+<div class="flex gap-3 flex-row-reverse">
+<div class="w-8 h-8 rounded-full bg-primary-container text-on-primary-container flex justify-center items-center font-bold text-xs flex-shrink-0">
+                            AK
+                        </div>
+<div class="flex flex-col items-end">
+<div class="flex items-baseline gap-2 flex-row-reverse">
+<span class="text-body-md font-bold text-on-surface">You</span>
+<span class="text-label-sm text-on-surface-variant">9:16 am</span>
+</div>
+<div class="bg-primary text-on-primary p-3 rounded-xl rounded-tr-sm mt-1 text-body-md inline-block max-w-[85%]">
+                                I'll upload it to Programs section now
+                            </div>
+</div>
+</div>
+<!-- Message 5 -->
+<div class="flex gap-3">
+<div class="w-8 h-8 rounded-full bg-surface-variant text-on-surface flex justify-center items-center font-bold text-xs flex-shrink-0">
+                            AN
+                        </div>
+<div class="flex flex-col">
+<div class="flex items-baseline gap-2">
+<span class="text-body-md font-bold text-on-surface">Ananya</span>
+<span class="text-label-sm text-on-surface-variant">9:17 am</span>
+</div>
+<div class="bg-surface-container-high p-3 rounded-xl rounded-tl-sm mt-1 text-body-md text-on-surface inline-block max-w-[85%]">
+                                Study session at 4pm? Block 3 reading room
+                            </div>
+</div>
+</div>
+</div>
+<!-- Input Area -->
+<div class="p-3 bg-surface-container border-t border-outline-variant flex items-center gap-2 flex-shrink-0 mb-[60px]">
+<button class="w-10 h-10 rounded-full flex items-center justify-center text-on-surface-variant hover:text-primary hover:bg-surface-variant transition-colors">
+<span class="material-symbols-outlined">attach_file</span>
+</button>
+<input class="flex-1 bg-surface-container-high border border-outline-variant rounded-full px-4 py-2 text-body-md text-on-surface focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary placeholder-on-surface-variant transition-all" placeholder="Message #general..." type="text"/>
+<button class="w-10 h-10 rounded-full flex items-center justify-center text-on-surface-variant hover:text-primary hover:bg-surface-variant transition-colors">
+<span class="material-symbols-outlined">sentiment_satisfied</span>
+</button>
+<button class="w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center hover:opacity-90 transition-colors">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">send</span>
+</button>
+</div>
+</div>
+<!-- List Drawer/Overlay (Hidden by default, for tab functionality) -->
+<div class="absolute inset-0 bg-surface-container z-40 transform -translate-x-full transition-transform duration-300 flex flex-col" id="list-overlay">
+<!-- Channels List -->
+<div class="flex-1 overflow-y-auto p-2" id="channels-list">
+<div class="text-label-sm font-label-sm text-on-surface-variant uppercase px-3 py-2 mt-2">Channels</div>
+<button class="w-full flex items-center gap-3 px-3 py-2 bg-surface-variant text-on-surface rounded-lg mb-1" onclick="closeOverlay()">
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+<span class="text-body-md font-bold"># general</span>
+<span class="ml-auto bg-primary text-on-primary text-[10px] font-bold px-1.5 py-0.5 rounded-full">4</span>
+</button>
+<button class="w-full flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:bg-surface-variant rounded-lg mb-1" onclick="closeOverlay()">
+<span class="w-2 h-2 rounded-full bg-green-500"></span>
+<span class="text-body-md"># cse-sem4</span>
+</button>
+<button class="w-full flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:bg-surface-variant rounded-lg mb-1" onclick="closeOverlay()">
+<span class="w-2 h-2 rounded-full bg-green-500"></span>
+<span class="text-body-md truncate"># nucleus-club</span>
+</button>
+<button class="w-full flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:bg-surface-variant rounded-lg mb-1" onclick="closeOverlay()">
+<span class="w-2 h-2 rounded-full bg-surface-variant"></span>
+<span class="text-body-md"># events</span>
+</button>
+<button class="w-full flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:bg-surface-variant rounded-lg mb-1" onclick="closeOverlay()">
+<span class="w-2 h-2 rounded-full bg-surface-variant"></span>
+<span class="text-body-md"># labs</span>
+</button>
+<button class="w-full flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:bg-surface-variant rounded-lg mb-1" onclick="closeOverlay()">
+<span class="w-2 h-2 rounded-full bg-green-500"></span>
+<span class="text-body-md"># placement</span>
+</button>
+</div>
+<!-- DMs List (Hidden by default) -->
+<div class="flex-1 overflow-y-auto p-2 hidden" id="dms-list">
+<div class="text-label-sm font-label-sm text-on-surface-variant uppercase px-3 py-2 mt-2">Direct Messages</div>
+<button class="w-full flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:bg-surface-variant rounded-lg mb-1" onclick="closeOverlay()">
+<span class="w-2 h-2 rounded-full bg-green-500"></span>
+<span class="text-body-md">Ananya</span>
+</button>
+<button class="w-full flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:bg-surface-variant rounded-lg mb-1" onclick="closeOverlay()">
+<span class="w-2 h-2 rounded-full bg-surface-variant"></span>
+<span class="text-body-md">Anusha</span>
+</button>
+<button class="w-full flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:bg-surface-variant rounded-lg mb-1" onclick="closeOverlay()">
+<span class="w-2 h-2 rounded-full bg-green-500"></span>
+<span class="text-body-md">Deekshith</span>
+</button>
+</div>
+<!-- Close Button for Overlay -->
+<button class="absolute bottom-4 right-4 w-12 h-12 bg-primary text-on-primary rounded-full shadow-lg flex items-center justify-center" onclick="closeOverlay()">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex items-center pb-2 pt-1 bg-surface-container border-t border-outline-variant overflow-x-auto"><!-- Dashboard -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-2 py-1 w-[20%] flex-shrink-0" href="#">
+<span class="material-symbols-outlined mb-1">dashboard</span>
+<span class="text-[10px] font-label-sm">Dashboard</span>
+</a>
+<!-- Chat (Active) -->
+<a class="flex flex-col items-center justify-center text-primary bg-secondary-container/20 rounded-xl px-2 py-1 w-[20%] flex-shrink-0" href="#">
+<span class="material-symbols-outlined mb-1" style="font-variation-settings: 'FILL' 1;">forum</span>
+<span class="text-[10px] font-label-sm font-bold">Chat</span>
+</a>
+<!-- Programs -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-2 py-1 w-[20%] flex-shrink-0" href="#">
+<span class="material-symbols-outlined mb-1">school</span>
+<span class="text-[10px] font-label-sm">Programs</span>
+</a>
+<!-- Faculty -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-2 py-1 w-[20%] flex-shrink-0" href="#">
+<span class="material-symbols-outlined mb-1">supervisor_account</span>
+<span class="text-[10px] font-label-sm">Faculty</span>
+</a>
+<!-- Rooms -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-2 py-1 w-[20%] flex-shrink-0" href="#">
+<span class="material-symbols-outlined mb-1">meeting_room</span>
+<span class="text-[10px] font-label-sm">Rooms</span>
+</a>
+<!-- Events -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-2 py-1 w-[20%] flex-shrink-0" href="#">
+<span class="material-symbols-outlined mb-1">calendar_today</span>
+<span class="text-[10px] font-label-sm">Events</span>
+</a>
+<!-- Admin -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-2 py-1 w-[20%] flex-shrink-0" href="#">
+<span class="material-symbols-outlined mb-1">settings</span>
+<span class="text-[10px] font-label-sm">Admin</span>
+</a></nav>
+<script>
+        function switchTab(tab) {
+            const channelsTab = document.getElementById('tab-channels');
+            const dmsTab = document.getElementById('tab-dms');
+            const channelsList = document.getElementById('channels-list');
+            const dmsList = document.getElementById('dms-list');
+            const overlay = document.getElementById('list-overlay');
+
+            // Open overlay if it's closed
+            if (overlay.classList.contains('-translate-x-full')) {
+                overlay.classList.remove('-translate-x-full');
+            }
+
+            if (tab === 'channels') {
+                channelsTab.classList.add('text-primary', 'border-primary');
+                channelsTab.classList.remove('text-on-surface-variant', 'border-transparent');
+                
+                dmsTab.classList.remove('text-primary', 'border-primary');
+                dmsTab.classList.add('text-on-surface-variant', 'border-transparent');
+                
+                channelsList.classList.remove('hidden');
+                dmsList.classList.add('hidden');
+            } else {
+                dmsTab.classList.add('text-primary', 'border-primary');
+                dmsTab.classList.remove('text-on-surface-variant', 'border-transparent');
+                
+                channelsTab.classList.remove('text-primary', 'border-primary');
+                channelsTab.classList.add('text-on-surface-variant', 'border-transparent');
+                
+                dmsList.classList.remove('hidden');
+                channelsList.classList.add('hidden');
+            }
+        }
+
+        function closeOverlay() {
+            const overlay = document.getElementById('list-overlay');
+            overlay.classList.add('-translate-x-full');
+            
+            // Reset tabs visual state slightly to indicate focus is back on chat
+            const channelsTab = document.getElementById('tab-channels');
+            const dmsTab = document.getElementById('tab-dms');
+            channelsTab.classList.remove('border-primary');
+            channelsTab.classList.add('border-transparent');
+            dmsTab.classList.remove('border-primary');
+            dmsTab.classList.add('border-transparent');
+        }
+    </script>
+</body></html>

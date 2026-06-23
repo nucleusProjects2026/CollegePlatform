@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Room Availability - College Mesh</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700&amp;family=Geist:wght@500;600&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary": "#7c3aed",
+                        "on-primary": "#ffffff",
+                        "primary-container": "#ede9fe",
+                        "on-primary-container": "#4c1d95",
+                        "primary-fixed-dim": "#8b5cf6",
+                        "secondary": "#4f46e5",
+                        "on-secondary": "#ffffff",
+                        "secondary-container": "#e0e7ff",
+                        "on-secondary-container": "#312e81",
+                        "tertiary": "#ea580c",
+                        "on-tertiary": "#ffffff",
+                        "tertiary-container": "#ffedd5",
+                        "on-tertiary-container": "#9a3412",
+                        "error": "#dc2626",
+                        "on-error": "#ffffff",
+                        "error-container": "#fee2e2",
+                        "on-error-container": "#991b1b",
+                        "background": "#f8f9fa",
+                        "on-background": "#1a1c1e",
+                        "surface": "#f8f9fa",
+                        "on-surface": "#1a1c1e",
+                        "surface-variant": "#e9ecef",
+                        "on-surface-variant": "#495057",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container-low": "#f8f9fa",
+                        "surface-container": "#f1f3f5",
+                        "surface-container-high": "#e9ecef",
+                        "surface-container-highest": "#dee2e6",
+                        "outline": "#868e96",
+                        "outline-variant": "#ced4da"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "margin-mobile": "16px",
+                        "gutter": "12px",
+                        "sm": "8px",
+                        "xs": "4px",
+                        "base": "4px",
+                        "md": "16px",
+                        "xl": "32px",
+                        "margin-desktop": "32px",
+                        "lg": "24px"
+                    },
+                    "fontFamily": {
+                        "headline-sm": ["Hanken Grotesk"],
+                        "body-md": ["Hanken Grotesk"],
+                        "label-md": ["Geist"],
+                        "headline-md": ["Hanken Grotesk"],
+                        "label-sm": ["Geist"],
+                        "display-lg": ["Hanken Grotesk"],
+                        "body-lg": ["Hanken Grotesk"]
+                    },
+                    "fontSize": {
+                        "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "label-sm": ["10px", { "lineHeight": "12px", "fontWeight": "600" }],
+                        "display-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .status-available { background-color: #dcfce7; color: #166534; border: 1px solid #bbf7d0; }
+        .status-occupied { background-color: #fee2e2; color: #991b1b; border: 1px solid #fecaca; }
+        .status-partial { background-color: #fef3c7; color: #92400e; border: 1px solid #fde68a; }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body-md min-h-screen flex flex-col pb-20">
+<!-- TopAppBar -->
+<header class="bg-surface-container-low border-b border-outline-variant flex justify-between items-center w-full px-margin-mobile py-2 z-50 sticky top-0">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center font-bold text-sm">
+                AK
+            </div>
+<h1 class="text-headline-sm font-headline-sm font-bold text-primary">Room Availability</h1>
+</div>
+<div class="flex items-center gap-2 text-on-surface-variant">
+<button class="p-2 hover:bg-surface-variant rounded-full transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-1 w-full max-w-3xl mx-auto p-margin-mobile flex flex-col gap-6">
+<!-- Filters Section -->
+<section class="bg-surface-container rounded-xl p-4 border border-outline-variant/30 flex flex-col gap-4">
+<h2 class="text-label-md font-label-md text-on-surface-variant uppercase tracking-wider">Search Filters</h2>
+<div class="grid grid-cols-2 gap-3">
+<div class="flex flex-col gap-1">
+<label class="text-label-sm font-label-sm text-outline">Building / Block</label>
+<div class="relative">
+<select class="w-full bg-surface-variant border border-outline-variant rounded-lg text-body-md text-on-surface py-2 px-3 appearance-none focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary">
+<option>Block 3</option>
+<option>Block 1</option>
+<option>Block 2</option>
+<option>Main Auditorium</option>
+</select>
+<span class="material-symbols-outlined absolute right-2 top-1/2 -translate-y-1/2 text-outline pointer-events-none text-sm">expand_more</span>
+</div>
+</div>
+<div class="flex flex-col gap-1">
+<label class="text-label-sm font-label-sm text-outline">Date</label>
+<div class="relative">
+<input class="w-full bg-surface-variant border border-outline-variant rounded-lg text-body-md text-on-surface py-2 px-3 appearance-none focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary" type="date" value="2026-06-25"/>
+</div>
+</div>
+</div>
+<div class="flex flex-col gap-1">
+<label class="text-label-sm font-label-sm text-outline">Time slot</label>
+<div class="relative">
+<select class="w-full bg-surface-variant border border-outline-variant rounded-lg text-body-md text-on-surface py-2 px-3 appearance-none focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary">
+<option>2:00 PM – 4:00 PM</option>
+<option>9:00 AM – 11:00 AM</option>
+<option>11:00 AM – 1:00 PM</option>
+</select>
+<span class="material-symbols-outlined absolute right-2 top-1/2 -translate-y-1/2 text-outline pointer-events-none text-sm">expand_more</span>
+</div>
+</div>
+<button class="w-full bg-primary text-on-primary py-2 rounded-lg font-label-md text-label-md flex items-center justify-center gap-2 mt-2 hover:bg-primary-fixed-dim transition-colors">
+<span class="material-symbols-outlined text-sm">search</span>
+                Check Availability
+            </button>
+</section>
+<!-- Results Section -->
+<section class="flex flex-col gap-4">
+<div class="flex items-center justify-between pb-2 border-b border-outline-variant/30">
+<h3 class="text-label-md font-label-md text-on-surface">Block 3 — Jun 25, 2026 · 2:00–4:00 PM</h3>
+<span class="bg-surface-variant text-on-surface-variant px-2 py-1 rounded text-[10px] font-bold uppercase tracking-wider">Results</span>
+</div>
+<!-- Legend -->
+<div class="flex items-center gap-4 text-label-sm font-label-sm text-outline">
+<div class="flex items-center gap-1.5"><div class="w-2 h-2 rounded-full bg-[#166534]"></div> Available</div>
+<div class="flex items-center gap-1.5"><div class="w-2 h-2 rounded-full bg-[#991b1b]"></div> Occupied</div>
+<div class="flex items-center gap-1.5"><div class="w-2 h-2 rounded-full bg-[#92400e]"></div> Partially free</div>
+</div>
+<!-- Room Grid -->
+<div class="grid grid-cols-2 gap-3">
+<!-- Room Card: Available -->
+<div class="status-available rounded-xl p-3 flex flex-col items-center justify-center text-center gap-1">
+<span class="text-headline-sm font-headline-sm font-bold">301</span>
+<span class="text-label-sm font-label-sm opacity-80 uppercase tracking-wide">Lab · 30 seats</span>
+</div>
+<!-- Room Card: Occupied -->
+<div class="status-occupied rounded-xl p-3 flex flex-col items-center justify-center text-center gap-1">
+<span class="text-headline-sm font-headline-sm font-bold">302</span>
+<span class="text-label-sm font-label-sm opacity-80 uppercase tracking-wide">Lecture hall</span>
+</div>
+<!-- Room Card: Available -->
+<div class="status-available rounded-xl p-3 flex flex-col items-center justify-center text-center gap-1">
+<span class="text-headline-sm font-headline-sm font-bold">303</span>
+<span class="text-label-sm font-label-sm opacity-80 uppercase tracking-wide">Seminar · 20</span>
+</div>
+<!-- Room Card: Partial -->
+<div class="status-partial rounded-xl p-3 flex flex-col items-center justify-center text-center gap-1">
+<span class="text-headline-sm font-headline-sm font-bold">304</span>
+<span class="text-label-sm font-label-sm opacity-80 uppercase tracking-wide">Lab · partial</span>
+</div>
+<!-- Room Card: Occupied -->
+<div class="status-occupied rounded-xl p-3 flex flex-col items-center justify-center text-center gap-1">
+<span class="text-headline-sm font-headline-sm font-bold">305</span>
+<span class="text-label-sm font-label-sm opacity-80 uppercase tracking-wide">Lecture hall</span>
+</div>
+<!-- Room Card: Available -->
+<div class="status-available rounded-xl p-3 flex flex-col items-center justify-center text-center gap-1">
+<span class="text-headline-sm font-headline-sm font-bold">306</span>
+<span class="text-label-sm font-label-sm opacity-80 uppercase tracking-wide">Reading room</span>
+</div>
+<!-- Room Card: Available -->
+<div class="status-available rounded-xl p-3 flex flex-col items-center justify-center text-center gap-1">
+<span class="text-headline-sm font-headline-sm font-bold">307</span>
+<span class="text-label-sm font-label-sm opacity-80 uppercase tracking-wide">Lab · 25 seats</span>
+</div>
+<!-- Room Card: Occupied -->
+<div class="status-occupied rounded-xl p-3 flex flex-col items-center justify-center text-center gap-1">
+<span class="text-headline-sm font-headline-sm font-bold">308</span>
+<span class="text-label-sm font-label-sm opacity-80 uppercase tracking-wide">HOD cabin</span>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 bg-surface-container border-t border-outline-variant pb-safe pt-1"><div class="flex overflow-x-auto no-scrollbar py-1 items-center snap-x"><a class="flex-shrink-0 flex flex-col items-center justify-center w-[20%] text-on-surface-variant hover:text-primary px-1 py-2 snap-start" href="#"><span class="material-symbols-outlined text-[24px] mb-1">dashboard</span><span class="text-label-sm font-label-sm truncate w-full text-center">Dashboard</span></a><a class="flex-shrink-0 flex flex-col items-center justify-center w-[20%] text-on-surface-variant hover:text-primary px-1 py-2 snap-start" href="#"><span class="material-symbols-outlined text-[24px] mb-1">forum</span><span class="text-label-sm font-label-sm truncate w-full text-center">Chat</span></a><a class="flex-shrink-0 flex flex-col items-center justify-center w-[20%] text-on-surface-variant hover:text-primary px-1 py-2 snap-start" href="#"><span class="material-symbols-outlined text-[24px] mb-1">school</span><span class="text-label-sm font-label-sm truncate w-full text-center">Programs</span></a><a class="flex-shrink-0 flex flex-col items-center justify-center w-[20%] text-on-surface-variant hover:text-primary px-1 py-2 snap-start" href="#"><span class="material-symbols-outlined text-[24px] mb-1">supervisor_account</span><span class="text-label-sm font-label-sm truncate w-full text-center">Faculty</span></a><a class="flex-shrink-0 flex flex-col items-center justify-center w-[20%] text-primary bg-primary-container rounded-xl px-1 py-2 snap-start scale-95 transition-transform" href="#"><span class="material-symbols-outlined text-[24px] mb-1" style="font-variation-settings: 'FILL' 1;">meeting_room</span><span class="text-label-sm font-label-sm truncate w-full text-center">Rooms</span></a><a class="flex-shrink-0 flex flex-col items-center justify-center w-[20%] text-on-surface-variant hover:text-primary px-1 py-2 snap-start" href="#"><span class="material-symbols-outlined text-[24px] mb-1">calendar_today</span><span class="text-label-sm font-label-sm truncate w-full text-center">Events</span></a><a class="flex-shrink-0 flex flex-col items-center justify-center w-[20%] text-on-surface-variant hover:text-primary px-1 py-2 snap-start" href="#"><span class="material-symbols-outlined text-[24px] mb-1">admin_panel_settings</span><span class="text-label-sm font-label-sm truncate w-full text-center">Admin</span></a></div></nav>
+<!-- Safe area padding for mobile nav -->
+<style>
+        .pb-safe { padding-bottom: max(0.5rem, env(safe-area-inset-bottom)); }
+    </style>
+</body></html>
