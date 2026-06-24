@@ -83,7 +83,7 @@ const FacultyLocator = () => {
         if (isMounted) {
           setFacultyList(faculty)
         }
-      } catch (requestError) {
+      } catch {
         if (isMounted) {
           setError('Unable to load faculty right now. Please try again.')
           setFacultyList([])
