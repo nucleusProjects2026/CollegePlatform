@@ -12,7 +12,7 @@ app.use('/api/v1/faculty', facultyRouter)
 
 const startServer = async () => {
     try {
-        await connectDB()
+       // await connectDB()
 
         app.listen(process.env.PORT || 5000 ,()=>{
             console.log(`the server started on PORT ${process.env.PORT || 5000} `)

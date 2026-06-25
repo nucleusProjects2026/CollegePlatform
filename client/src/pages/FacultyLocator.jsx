@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
-import FacultyCard from '../components/FacultyCard'
-import SearchBar from '../components/SearchBar'
+import FacultyCard from '../components/faculty_locator/FacultyCard'
+import SearchBar from '../components/faculty_locator/SearchBar'
 import { getFaculty, searchFaculty } from '../services/facultyApi'
 
 const departments = ['All Departments', 'Computer Science', 'Mechanical', 'Civil', 'Electrical']

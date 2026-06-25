@@ -34,7 +34,7 @@ const facultySchema = new mongoose.Schema(
     },
     image: {
       type: String,
-      default: '',
+      default: '/default-faculty.png',
       trim: true,
     },
     status: {
