@@ -1,6 +1,14 @@
+import { Route, Routes } from 'react-router-dom'
+import FacultyLocator from './pages/FacultyLocator'
+
 const App = () => {
   return (
-    <div>App</div>
+    <Routes>
+      <Route
+        path="/faculty-locator"
+        element={<FacultyLocator />}
+      />
+    </Routes>
   )
 }
 
