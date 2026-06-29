@@ -11,24 +11,16 @@ const {
   deleteEvent,
 } = require('../controllers/eventController');
 
-const { protect, optionalAuth, restrictTo } = require('../middlewares/auth');
+// NOTE: Auth middleware removed for now 
+// When auth is added back, import { protect, restrictTo } from '../middlewares/auth'
+// and add them to the admin routes below.
 
-// ── Public routes ──────────────────────────────────────────────────────────
-// optionalAuth attaches req.user IF a valid token is present, without
-// rejecting anonymous visitors. This lets a logged-in admin browsing the
-// site preview draft events, while everyone else only ever sees published ones.
-
-router.get('/', optionalAuth, getAllEvents);
-router.get('/slug/:slug', optionalAuth, getEventBySlug);
-
-// ── Admin-only routes ─────────────────────────────────────────────────────
-// protect requires a valid token. restrictTo('admin') then requires the
-// logged-in user's role to actually be 'admin'.
-
-router.post('/', protect, restrictTo('admin'), createEvent);
-router.get('/:id', protect, restrictTo('admin'), getEventById);
-router.patch('/:id', protect, restrictTo('admin'), updateEvent);
-router.patch('/:id/status', protect, restrictTo('admin'), changeEventStatus);
-router.delete('/:id', protect, restrictTo('admin'), deleteEvent);
+router.get('/',             getAllEvents);
+router.get('/slug/:slug',   getEventBySlug);
+router.post('/',            createEvent);
+router.get('/:id',          getEventById);
+router.patch('/:id',        updateEvent);
+router.patch('/:id/status', changeEventStatus);
+router.delete('/:id',       deleteEvent);
 
 module.exports = router;
